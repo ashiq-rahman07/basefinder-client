@@ -62,8 +62,8 @@ export default function Navbar2() {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href="/signup" className="w-full">
-                    Sign Up
+                  <Link href="/register" className="w-full">
+                    Register
                   </Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -96,8 +96,8 @@ export default function Navbar2() {
                 <Link href="/login" className="text-gray-700 hover:text-blue-600">
                   Login
                 </Link>
-                <Link href="/signup" className="text-gray-700 hover:text-blue-600">
-                  Sign Up
+                <Link href="/register" className="text-gray-700 hover:text-blue-600">
+                  Register
                 </Link>
               </div>
             </div>

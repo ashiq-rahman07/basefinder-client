@@ -17,6 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema } from "./registerValidation";
 import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
+import { Select,SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function RegisterForm() {
   const form = useForm({
@@ -32,6 +33,7 @@ export default function RegisterForm() {
   //   console.log(password, passwordConfirm);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    // console.log(data)
     try {
       const res = await registerUser(data);
       if (res?.success) {
@@ -83,6 +85,37 @@ export default function RegisterForm() {
               </FormItem>
             )}
           />
+            <FormField
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Role</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select User Role" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                     
+                        <SelectItem  value="landlord">
+                          Landlord
+                        </SelectItem>
+                        <SelectItem  value="tenant">
+                          Tenant
+                        </SelectItem>
+                  
+                    </SelectContent>
+                  </Select>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           <FormField
             control={form.control}
             name="password"

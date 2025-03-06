@@ -1,0 +1,54 @@
+// import { columns } from "@/components/UserColumns";
+// import { DataTable } from "@/components/DataTable";
+// import { User } from "@/types";
+
+import { DataTable } from "@/components/modules/dashboard/admin/userTable/DataTable";
+import { columns } from "@/components/modules/dashboard/admin/userTable/UserColumns";
+// import { IUser } from "@/types";
+
+// type IUseresponse = {
+//     data:
+// }
+async function getUsers() {
+    // Fetch users from your API
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`);
+    const data =  await res.json();
+    return data.data.result;
+ 
+  }
+export default async function UserManagement() {
+  const users = await getUsers();
+//   const userData = users.data.result
+  console.log(users)
+// const users:Partial<IUser[]> = [
+//     {
+//         userId: "12345456667767",
+//         name: "Ask1",
+//         email: "ask@gmail.com",
+//         isActive: true,
+//         role: "landlord"
+//     },
+//     {
+//         userId: "12345456667dfhdfh5",
+//         name: "Tenant1",
+//         email: "ask@gmail.com",
+//         isActive: true,
+//         role: "tenant",
+//     },
+//     {
+//         userId: "1234545fgch556667dfhdfh5",
+//         name: "Tenant4",
+//         email: "ask@gmail.com",
+//         isActive: true,
+//         role: "tenant",
+//     }
+// ]
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-6">User Management</h1>
+      <DataTable columns={columns} data={users} />
+    </div>
+  );
+}

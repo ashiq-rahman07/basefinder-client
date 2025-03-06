@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
-export function NavMain({
+export const NavMain = ({
   items,
 }: {
   items: {
@@ -33,7 +33,8 @@ export function NavMain({
       url: string;
     }[];
   }[];
-}) {
+}) => {
+  
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Menu</SidebarGroupLabel>
@@ -76,4 +77,4 @@ export function NavMain({
       </SidebarMenu>
     </SidebarGroup>
   );
-}
+};
