@@ -2,7 +2,7 @@
 
 const LandlordPage = () => {
   return (
-    <div>This is LandlordPage</div>
+    <div>This is Landlord Dashboard</div>
   )
 }
 

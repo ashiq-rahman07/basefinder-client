@@ -2,24 +2,28 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Menu, User } from "lucide-react";
+// import { Button } from "@/components/ui/button";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/dropdown-menu";
+import { Menu } from "lucide-react";
 import Image from "next/image";
 import Logo from '@/assets/houselogo.png'
+// import { useUser } from "@/context/UserContext";
+import DropDown from "./DropDown";
 
 export default function Navbar2() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+//  const { user,isLoading } = useUser();
   // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+ 
 
   return (
     <nav className="bg-white shadow-md fixed w-full z-50">
@@ -47,7 +51,8 @@ export default function Navbar2() {
           </div>
 
           {/* Authentication Menu */}
-          <div className="hidden md:flex items-center space-x-4">
+          <DropDown/>
+          {/* <div className="hidden md:flex items-center space-x-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center space-x-2">
@@ -56,6 +61,19 @@ export default function Navbar2() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-48">
+
+                { user?  <>
+                  <DropdownMenuItem>
+                  <Link href={`/${user?.role}/dashboard`} className="w-full">
+                    Dashboard
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={`/${user?.role}/dashboard`} className="w-full">
+                    Log Out
+                  </Link>
+                </DropdownMenuItem>
+                </> :       <>
                 <DropdownMenuItem>
                   <Link href="/login" className="w-full">
                     Login
@@ -66,9 +84,12 @@ export default function Navbar2() {
                     Register
                   </Link>
                 </DropdownMenuItem>
+                </>
+                }
+          
               </DropdownMenuContent>
             </DropdownMenu>
-          </div>
+          </div> */}
 
           {/* Mobile Menu Toggle */}
           <button onClick={toggleMenu} className="md:hidden p-2">

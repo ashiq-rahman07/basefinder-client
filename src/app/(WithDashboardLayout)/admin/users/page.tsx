@@ -2,8 +2,9 @@
 // import { DataTable } from "@/components/DataTable";
 // import { User } from "@/types";
 
-import { DataTable } from "@/components/modules/dashboard/admin/userTable/DataTable";
-import { columns } from "@/components/modules/dashboard/admin/userTable/UserColumns";
+import ManageUsers from "@/components/modules/dashboard/admin/user";
+// import { DataTable } from "@/components/modules/dashboard/admin/user/DataTable";
+// import { columns } from "@/components/modules/dashboard/admin/user/UserColumns";
 // import { IUser } from "@/types";
 
 // type IUseresponse = {
@@ -20,7 +21,7 @@ async function getUsers() {
 export default async function UserManagement() {
   const users = await getUsers();
 //   const userData = users.data.result
-  console.log(users)
+  // console.log(users)
 // const users:Partial<IUser[]> = [
 //     {
 //         userId: "12345456667767",
@@ -47,8 +48,9 @@ export default async function UserManagement() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">User Management</h1>
-      <DataTable columns={columns} data={users} />
+      
+      <ManageUsers users={users}/>
+      {/* <DataTable columns={columns} data={users} /> */}
     </div>
   );
 }
