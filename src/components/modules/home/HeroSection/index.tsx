@@ -11,17 +11,17 @@ import {
 
 export default function HeroSection() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center">
+    <div className="relative h-[550px] flex items-center justify-center">
       {/* Background Image with Blur and Low Opacity */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('https://cdn.britannica.com/05/157305-004-53D5D212.jpg')", // Replace with your image path
-          filter: "blur(4px)", // Apply blur
-          opacity: "0.4", // Apply low opacity
+          filter: "blur(1px)", // Apply blur
+          opacity: "0.6", // Apply low opacity
         }}
       ></div>
-
+ <div className="absolute inset-0 bg-black/50"></div>
       {/* Hero Content */}
       <div className="relative z-10 text-center">
         <h1 className="text-4xl font-bold mb-4">Find Your Perfect Rental Home</h1>
@@ -62,7 +62,7 @@ export default function HeroSection() {
 
             {/* Search Button */}
             <div>
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" className="w-full">
                 Search
               </Button>
             </div>

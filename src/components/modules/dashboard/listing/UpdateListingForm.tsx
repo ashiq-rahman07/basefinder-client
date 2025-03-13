@@ -13,45 +13,49 @@ import { Input } from "@/components/ui/input";
 import {
   FieldValues,
   SubmitHandler,
-//   useFieldArray,
+ 
   useForm,
 } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
-import {  useState } from "react";
+import { useEffect, useState } from "react";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
 // import { Plus } from "lucide-react";
 import Logo from "@/assets/svgs/Logo";
 
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
-// import { IBrand, ICategory } from "@/types";
-// import { getAllCategories } from "@/services/Category";
-// import { getAllBrands } from "@/services/Brand";
-import { addProduct } from "@/services/Product";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {  ICategory } from "@/types";
+import { getAllCategories } from "@/services/Category";
+
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+// import { updateProduct } from "@/services/Product";
+import { IListing } from "@/types/listing";
+import { updateListing } from "@/services/listing";
 
-export default function AddListingsForm() {
+export default function UpdateListingForm({ listing }: { listing: IListing }) {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
-  const [imagePreview, setImagePreview] = useState<string[] | []>([]);
-//   const [categories, setCategories] = useState<ICategory[] | []>([]);
-//   const [brands, setBrands] = useState<IBrand[] | []>([]);
+  const [imagePreview, setImagePreview] = useState<string[] | []>(
+    listing?.images || []
+  );
+  const [categories, setCategories] = useState<ICategory[] | []>([]);
+
 
   const router = useRouter();
 
   const form = useForm({
     defaultValues: {
-      location: "",
-      description: "",
-      rentAmount: "",
-      category: "",
-      bedrooms: "",
+      location: listing?.location || "",
+      description:listing?.description || "",
+      rentAmount:listing?.rentAmount || "",
+      category:listing?.category?.name || "",
+      bedrooms:listing?.bedrooms || "",
     },
   });
 
@@ -61,26 +65,22 @@ export default function AddListingsForm() {
 
 
 
- 
 
 
- 
 
-  // console.log(specFields);
+  useEffect(() => {
+    const fetchData = async () => {
+      const [categoriesData] = await Promise.all([
+        getAllCategories(),
+       
+      ]);
 
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       const [categoriesData, brandsData] = await Promise.all([
-//         getAllCategories(),
-//         getAllBrands(),
-//       ]);
+      setCategories(categoriesData?.data);
+     
+    };
 
-//       setCategories(categoriesData?.data);
-//       setBrands(brandsData?.data);
-//     };
-
-//     fetchData();
-//   }, []);
+    fetchData();
+  }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
@@ -89,11 +89,12 @@ export default function AddListingsForm() {
 
     const modifiedData = {
       ...data,
-      rentAmount: parseInt(data.price),
-      bedrooms: parseInt(data.stock),
     
+     
+      rentAmount: parseInt(data.rentAmount),
+      bedrooms: parseInt(data.bedrooms),
     };
-
+console.log(modifiedData)
     const formData = new FormData();
     formData.append("data", JSON.stringify(modifiedData));
 
@@ -101,11 +102,11 @@ export default function AddListingsForm() {
       formData.append("images", file);
     }
     try {
-      const res = await addProduct(formData);
+      const res = await updateListing(formData, listing?._id);
 
       if (res.success) {
         toast.success(res.message);
-        router.push("/user/shop/products");
+        router.push("/landlord/listing");
       } else {
         toast.error(res.message);
       }
@@ -119,7 +120,7 @@ export default function AddListingsForm() {
       <div className="flex items-center space-x-4 mb-5 ">
         <Logo />
 
-        <h1 className="text-xl font-bold">Add Listing</h1>
+        <h1 className="text-xl font-bold">Update Listing Info</h1>
       </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -132,10 +133,38 @@ export default function AddListingsForm() {
               name="location"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>location</FormLabel>
+                  <FormLabel>Location</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Listing Category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories.map((category) => (
+                        <SelectItem key={category?._id} value={category?._id}>
+                          {category?.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
@@ -154,63 +183,6 @@ export default function AddListingsForm() {
                 </FormItem>
               )}
             />
-
-            {/* <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Product Category" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {categories.map((category) => (
-                        <SelectItem key={category?._id} value={category?._id}>
-                          {category?.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="brand"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Brand</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Product Brand" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {brands.map((brand) => (
-                        <SelectItem key={brand?._id} value={brand?._id}>
-                          {brand?.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
             <FormField
               control={form.control}
               name="bedrooms"
@@ -267,14 +239,8 @@ export default function AddListingsForm() {
             </div>
           </div>
 
-         
-
-         
-
-         
-
-          <Button type="submit" className="mt-5 w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Adding Listing....." : "Add Listing"}
+         <Button type="submit" className="mt-5 w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Update Listing" : "Listing"}
           </Button>
         </form>
       </Form>

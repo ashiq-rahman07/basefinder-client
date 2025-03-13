@@ -20,8 +20,11 @@ const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
+  // const [user, setUser] = useState<IUser>();
   const [isLoading, setIsLoading] = useState(true);
 
+
+  // Fetch the current user on mount
   const handleUser = async () => {
     const user = await getCurrentUser();
     setUser(user);
@@ -31,7 +34,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     handleUser();
   }, [isLoading]);
- 
   return (
     <UserContext.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       {children}

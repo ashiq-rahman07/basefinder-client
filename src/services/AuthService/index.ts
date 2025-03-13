@@ -1,6 +1,8 @@
 "use server";
 
+import { IUser } from "@/types";
 import { jwtDecode } from "jwt-decode";
+// import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { FieldValues } from "react-hook-form";
 
@@ -18,7 +20,7 @@ export const registerUser = async (userData: FieldValues) => {
     if (result.success) {
       (await cookies()).set("accessToken", result.data.accessToken);
     }
-
+   
     return result;
   } catch (error: any) {
     return Error(error);
@@ -34,14 +36,19 @@ export const loginUser = async (userData: FieldValues) => {
       },
       body: JSON.stringify(userData),
     });
-
+    
     const result = await res.json();
+    if (result?.success) {
+      // Set tokens in cookies
+      (await cookies()).set("accessToken", result?.data?.accessToken);
+      (await cookies()).set("refreshToken", result?.data?.refreshToken);
 
-    if (result.success) {
-      (await cookies()).set("accessToken", result.data.accessToken);
+      // Decode the access token to get user data
+      const decodedUser = jwtDecode(result?.data?.accessToken);
+      console.log('logindecoded', decodedUser)
+      return decodedUser; // Return the decoded user data
     }
-
-    return result;
+    return null;
   } catch (error: any) {
     return Error(error);
   }
@@ -49,15 +56,13 @@ export const loginUser = async (userData: FieldValues) => {
 
 export const getCurrentUser = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;
-  let decodedData = null;
 
   if (accessToken) {
-    decodedData = await jwtDecode(accessToken);
-    console.log(decodedData)
-    return decodedData;
-  } else {
-    return null;
+    const decodedData = jwtDecode(accessToken); // Decode the token
+    return decodedData as IUser; // Return the decoded user data
   }
+
+  return null; // Return null if no token is found
 };
 
 export const reCaptchaTokenVerification = async (token: string) => {
@@ -81,4 +86,5 @@ export const reCaptchaTokenVerification = async (token: string) => {
 
 export const logout = async () => {
   (await cookies()).delete("accessToken");
+
 };

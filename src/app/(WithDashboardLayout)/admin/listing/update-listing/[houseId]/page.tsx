@@ -1,9 +1,11 @@
-import UpdateListingForm from "@/components/modules/listing/UpdateListingForm";
-// import UpdateProductForm from "@/components/modules/shop/product/UpdateProductForm";
+
+
+import UpdateListingForm from "@/components/modules/dashboard/listing/UpdateListingForm";
 import { getSingleListing } from "@/services/listing";
+// import UpdateProductForm from "@/components/modules/shop/product/UpdateProductForm";
 // import { getSingleProduct } from "@/services/Product";
 
-const UpdateProductPage = async ({
+const UpdateListingPage = async ({
   params,
 }: {
   params: Promise<{ houseId: string }>;
@@ -11,7 +13,7 @@ const UpdateProductPage = async ({
   const { houseId } = await params;
 
   const { data:listing } = await getSingleListing(houseId);
-  //   console.log(listing);
+  //   console.log(product);
 
   return (
     <div className="flex justify-center items-center">
@@ -20,4 +22,4 @@ const UpdateProductPage = async ({
   );
 };
 
-export default UpdateProductPage;
+export default UpdateListingPage;

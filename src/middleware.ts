@@ -47,6 +47,7 @@ export const config = {
     "/admin",
     "/admin/:page",
     "/landlord",
+    "/landlord/listing",
     "/landlord/:page",
     "/tenant",
     "/tenant:page",

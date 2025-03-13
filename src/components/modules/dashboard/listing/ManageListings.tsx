@@ -1,38 +1,39 @@
 "use client";
 
 import { NMTable } from "@/components/ui/core/NMTable/index";
-import { IProduct } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { Edit, Eye, Plus, Trash } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { IListing } from "@/types/listing";
+import EmptyItems from "@/components/shared/EmptyItems";
 
-const ManageListings = ({ products }: { products: IProduct[] }) => {
+const ManageListings = ({ listings }: { listings: IListing[] }) => {
   const router = useRouter();
 
-  const handleView = (product: IProduct) => {
-    console.log("Viewing product:", product);
+  const handleView = (id:string) => {
+    console.log("Viewing product:", id);
   };
 
   const handleDelete = (productId: string) => {
     console.log("Deleting product with ID:", productId);
   };
 
-  const columns: ColumnDef<IProduct>[] = [
+  const columns: ColumnDef<IListing>[] = [
     {
-      accessorKey: "name",
-      header: "Product Name",
+      accessorKey: "location",
+      header: "Location",
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Image
-            src={row.original.imageUrls[0]}
-            alt={row.original.name}
+            src={row.original.images[0]}
+            alt={row.original.location}
             width={40}
             height={40}
             className="w-8 h-8 rounded-full"
           />
-          <span className="truncate">{row.original.name}</span>
+          <span className="truncate">{row.original.location}</span>
         </div>
       ),
     },
@@ -42,27 +43,35 @@ const ManageListings = ({ products }: { products: IProduct[] }) => {
       cell: ({ row }) => <span>{row.original.category.name}</span>,
     },
     {
-      accessorKey: "brand",
-      header: "Brand",
-      cell: ({ row }) => <span>{row.original.brand.name}</span>,
+      accessorKey: "landlordUser",
+      header: "Landlord User",
+      cell: ({ row }) => <span>{row.original.landlordUser.name}</span>,
     },
     {
-      accessorKey: "stock",
-      header: "Stock",
-      cell: ({ row }) => <span>{row.original.stock}</span>,
+      accessorKey: "rentAmount",
+      header: "Rent Amount",
+      cell: ({ row }) => <span>{row.original.rentAmount}</span>,
     },
     {
-      accessorKey: "price",
-      header: "Price",
-      cell: ({ row }) => <span>$ {row.original.price.toFixed(2)}</span>,
+      accessorKey: "bedrooms",
+      header: "Total Bedrooms",
+      cell: ({ row }) => <span>{row.original.bedrooms}</span>,
     },
     {
-      accessorKey: "offerPrice",
-      header: "Ofter Price",
+      accessorKey: "isAvailable",
+      header: () => <div>Available</div>,
       cell: ({ row }) => (
-        <span>
-          $ {row.original.offerPrice ? row.original.offerPrice.toFixed(2) : "0"}
-        </span>
+        <div>
+          {row.original.isAvailable? (
+            <p className="text-green-500 border bg-green-100 w-14 text-center px-1 rounded">
+              True
+            </p>
+          ) : (
+            <p className="text-red-500 border bg-red-100 w-14 text-center px-1 rounded">
+              False
+            </p>
+          )}
+        </div>
       ),
     },
     {
@@ -73,7 +82,7 @@ const ManageListings = ({ products }: { products: IProduct[] }) => {
           <button
             className="text-gray-500 hover:text-blue-500"
             title="View"
-            onClick={() => handleView(row.original)}
+            onClick={() => handleView(row.original._id)}
           >
             <Eye className="w-5 h-5" />
           </button>
@@ -83,7 +92,7 @@ const ManageListings = ({ products }: { products: IProduct[] }) => {
             title="Edit"
             onClick={() =>
               router.push(
-                `/user/shop/products/update-product/${row.original._id}`
+                `/listing/update-listing/${row.original._id}`
               )
             }
           >
@@ -105,17 +114,26 @@ const ManageListings = ({ products }: { products: IProduct[] }) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-bold">Manage Products</h1>
-        <div className="flex items-center gap-2">
+   
+        <h1 className="text-xl font-bold">Manage Listing</h1>
+    
+         
+       { 
+        listings.length === 0 && <EmptyItems title="Listings"/>
+       }
+    
+   
+        
+        <div className="flex items-center gap-2 pb-2">
           <Button
-            onClick={() => router.push("/user/shop/products/add-product")}
+            onClick={() => router.push("/listing/add-listing")}
             size="sm"
           >
-            Add Product <Plus />
+            Add Listing <Plus />
           </Button>
         </div>
       </div>
-      <NMTable columns={columns} data={products || []} />
+      <NMTable columns={columns} data={listings || []} />
     </div>
   );
 };

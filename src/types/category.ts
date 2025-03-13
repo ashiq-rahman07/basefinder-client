@@ -2,12 +2,13 @@ export interface ICategory {
     _id: string;
     name: string;
     description: string;
-    parent: string | null;
-    isActive: boolean;
-    createdBy: string;
+ createdBy:{
+   _id: string;
+   name: string;
+ };
     icon: string;
-    slug: string;
+
     createdAt: string;
     updatedAt: string;
-    children: ICategory[];
+  
   }

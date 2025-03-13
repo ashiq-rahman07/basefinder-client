@@ -22,83 +22,85 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 // import { NavMain } from "./nav-main";
+import {  Home, Users, List, Settings, MessageSquare, LucideIcon } from "lucide-react";
 import { NavUser } from "./nav-user";
 import Link from "next/link";
 import Logo from "@/assets/svgs/Logo";
 import { NavMain2 } from "./sitebar-menuitem";
+import { useUser } from "@/context/UserContext";
+// import { toast } from "sonner";
 
-// const data = {
-//   navMain: [
-//     {
-//       title: "Dashboard",
-//       url: "/user/dashboard",
-//       icon: SquareTerminal,
-//       isActive: true,
-//     },
-//     {
-//       title: "Shop",
-//       url: "/user/shop/products",
-//       icon: Bot,
-//       items: [
-//         {
-//           title: "Manage Products",
-//           url: "/user/shop/products",
-//         },
-//         {
-//           title: "Manage Categories",
-//           url: "/user/shop/category",
-//         },
-//         {
-//           title: "Manage Brands",
-//           url: "/user/shop/brand",
-//         },
-//       ],
-//     },
+interface INavItem {
+  title: string;
+  url: string;
+  icon: LucideIcon;
+  isActive?: boolean;
+  items?:{
+    title: string
+    url: string
+  }[],
+  roles?: ("admin" | "landlord" | "tenant")[]; // Roles allowed to see this item
+}
 
-//     {
-//       title: "Settings",
-//       url: "#",
-//       icon: Settings,
-//       items: [
-//         {
-//           title: "Profile",
-//           url: "/profile",
-//         },
-//       ],
-//     },
-//   ],
-//   navSecondary: [
-//     {
-//       title: "Support",
-//       url: "#",
-//       icon: LifeBuoy,
-//     },
-//     {
-//       title: "Feedback",
-//       url: "#",
-//       icon: Send,
-//     },
-//   ],
-//   projects: [
-//     {
-//       name: "Design Engineering",
-//       url: "#",
-//       icon: Frame,
-//     },
-//     {
-//       name: "Sales & Marketing",
-//       url: "#",
-//       icon: PieChart,
-//     },
-//     {
-//       name: "Travel",
-//       url: "#",
-//       icon: Map,
-//     },
-//   ],
-// };
+export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
+   const { user } = useUser();
+  
+  const navItems: INavItem[] = [
+    {
+      title: "Dashboard",
+      url: `/${user?.role}/dashboard`,
+      icon: Home,
+      isActive: true,
+      roles: ["admin", "landlord", "tenant"], // All roles can see this
+    },
+    {
+      title: "User Management",
+      url: "/admin/users",
+      icon: Users,
+      roles: ["admin"], // Only admin can see this
+    },
+    {
+      title: "Category Management",
+      url: '/category',
+      icon: Users,
+      roles: ["admin","landlord"], // Only admin can see this
+    },
+    {
+      title: "Listings Management",
+      url: '/listing',
+      icon: List,
+      roles: ["landlord","admin"], // Admin and landlord can see this
+      items: [
+        {
+          title: "Add Listing",
+          url: "/listing/add-listing",
+        },
+       
+      ],
+    },
+    {
+      title: "My Request",
+      url: "/tenant/my-request",
+      icon: MessageSquare,
+      roles: ["tenant"], // Only tenant can see this
+      
+    },
+    {
+      title: "Settings",
+      url: "#",
+      icon: Settings,
+      roles: ["admin", "landlord", "tenant"],
+      items: [
+        {
+          title: "Profile",
+          url: "/profile",
+        },
+      ],
+     
+    },
+   
+  ]
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -118,12 +120,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {/* <NavMain items={data.navMain} /> */}
-        <NavMain2  />
+        <NavMain2 items={navItems} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
       </SidebarFooter>
     </Sidebar>
   );
-}
+};
