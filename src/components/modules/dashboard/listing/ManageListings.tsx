@@ -22,8 +22,8 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
 
   const columns: ColumnDef<IListing>[] = [
     {
-      accessorKey: "location",
-      header: "Location",
+      accessorKey: "name",
+      header: "Name",
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Image
@@ -33,9 +33,14 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
             height={40}
             className="w-8 h-8 rounded-full"
           />
-          <span className="truncate">{row.original.location}</span>
+          <span className="truncate">{row.original.name}</span>
         </div>
       ),
+    },
+    {
+      accessorKey: "location",
+      header: "Location",
+      cell: ({ row }) => <span>{row.original.location}</span>,
     },
     {
       accessorKey: "category",
@@ -57,6 +62,7 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
       header: "Total Bedrooms",
       cell: ({ row }) => <span>{row.original.bedrooms}</span>,
     },
+  
     {
       accessorKey: "isAvailable",
       header: () => <div>Available</div>,

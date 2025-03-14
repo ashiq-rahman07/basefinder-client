@@ -51,11 +51,14 @@ export default function UpdateListingForm({ listing }: { listing: IListing }) {
 
   const form = useForm({
     defaultValues: {
+
+      name: listing?.name || "",
       location: listing?.location || "",
       description:listing?.description || "",
       rentAmount:listing?.rentAmount || "",
       category:listing?.category?.name || "",
       bedrooms:listing?.bedrooms || "",
+      bathrooms:listing?.bathrooms || "",
     },
   });
 
@@ -130,6 +133,19 @@ console.log(modifiedData)
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <FormField
               control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} value={field.value || ""} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="location"
               render={({ field }) => (
                 <FormItem>
@@ -189,6 +205,19 @@ console.log(modifiedData)
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Total Bedrooms</FormLabel>
+                  <FormControl>
+                    <Input {...field} value={field.value || ""} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bathrooms"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Total Bathrooms</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} />
                   </FormControl>

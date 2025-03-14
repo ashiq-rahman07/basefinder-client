@@ -29,6 +29,7 @@ export default function Navbar() {
       router.push("/");
     }
   };
+  
 
   return (
     <header className="border-b w-full">

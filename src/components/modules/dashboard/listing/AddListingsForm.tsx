@@ -40,11 +40,13 @@ export default function AddListingsForm() {
 
   const form = useForm({
     defaultValues: {
+      name:"",
       location: "",
       description: "",
       rentAmount: "",
       category: "",
       bedrooms: "",
+      bathrooms: "",
     },
   });
 
@@ -73,6 +75,7 @@ export default function AddListingsForm() {
       ...data,
       rentAmount: parseInt(data.rentAmount),
       bedrooms: parseInt(data.bedrooms),
+      bathrooms: parseInt(data.bathrooms),
     
     };
 
@@ -95,6 +98,7 @@ export default function AddListingsForm() {
       console.error(err);
     }
   };
+  
 
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5 ">
@@ -109,6 +113,19 @@ export default function AddListingsForm() {
             <p className="text-primary font-bold text-xl">House Information</p>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} value={field.value || ""} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="location"
@@ -169,6 +186,19 @@ export default function AddListingsForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Total Bedrooms</FormLabel>
+                  <FormControl>
+                    <Input {...field} value={field.value || ""} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bathrooms"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Total Bathrooms</FormLabel>
                   <FormControl>
                     <Input {...field} value={field.value || ""} />
                   </FormControl>

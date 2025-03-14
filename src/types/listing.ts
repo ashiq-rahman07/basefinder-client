@@ -1,9 +1,11 @@
  export interface IListing {
     _id: string;
+    name:string;
     location: string;
     description: string;
     rentAmount: number;
     bedrooms: number;
+    bathrooms:number;
     category: {
       _id: string;
       name: string;

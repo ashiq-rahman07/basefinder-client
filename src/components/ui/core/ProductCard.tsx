@@ -9,18 +9,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { IProduct } from "@/types";
-import { Heart, ShoppingCart, Star } from "lucide-react";
+// import { IProduct } from "@/types";
+import { IListing } from "@/types/listing";
+import { Bath, BedDouble} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const ProductCard = ({ product }: { product: IProduct }) => {
+const ProductCard = ({ listing }: { listing: IListing }) => {
   return (
     <Card className="p-3">
       <CardHeader className="relative p-0 h-48">
         <Image
           src={
-            product?.imageUrls[0] ||
+            listing?.images[0] ||
             "https://psediting.websites.co.in/obaju-turquoise/img/product-placeholder.png"
           }
           width={500}
@@ -28,75 +29,71 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           alt="product image"
           className="rounded-sm h-48 object-cover"
         />
-        {product?.stock === 0 && (
+        {!listing?.isAvailable && (
           <div className="absolute left-2 top-0 bg-red-500 text-white px-2 rounded-full">
-            Out of Stock
+           Not Available Now
           </div>
         )}
       </CardHeader>
 
       <CardContent className=" p-0 mt-2">
-        <Link href={`/products/${product?._id}`} passHref>
+        <Link href={`/products/${listing?._id}`} passHref>
           <CardTitle
-            title={product?.name}
+            title={listing?.name}
             className="font-semibold cursor-pointer text-sm"
           >
-            {product?.name.length > 30
-              ? product?.name?.slice(0, 30) + "..."
-              : product?.name}
+            {listing?.name.length > 30
+              ? listing?.name?.slice(0, 30) + "..."
+              : listing?.name}
           </CardTitle>
+          <p className="text-sm text-gray-700 py-2">{listing?.location}</p>
         </Link>
 
-        <div className="flex items-center justify-between my-2">
-          <p className="text-sm text-gray-600">
-            {product?.offerPrice ? (
-              <>
-                <span className="font-semibold mr-2 text-orange-400">
-                  $ {product?.offerPrice}
-                </span>
-                <del className="font-semibold text-xs">$ {product?.price}</del>
-              </>
-            ) : (
-              <span className="font-semibold">$ {product?.price}</span>
-            )}
-          </p>
+        <div className="flex items-center  gap-4 my-2">
+         
 
           <div className="flex items-center justify-center gap-1">
-            <Star className="w-4 h-4" fill="orange" stroke="orange" />
+          <BedDouble />
             <span className="text-sm font-medium text-gray-700">
-              {product?.averageRating}
+              {listing?.bedrooms}
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-1">
+          <Bath />
+            <span className="text-sm font-medium text-gray-700">
+              {listing?.bathrooms}
             </span>
           </div>
         </div>
       </CardContent>
+     
 
-      <CardFooter className="block p-0">
-        <div className="flex gap-2 items-center justify-between">
+          <CardFooter className="block p-0">
+        <div className="flex gap-2 items-center pt-2 justify-between">
+          <Link href={`/listings/request/${listing?._id}`}>
           <Button
-            disabled={product?.stock === 0}
+            disabled={!listing?.isAvailable}
             size="sm"
             variant="outline"
             className="w-32"
           >
-            Buy Now
+            Add request
           </Button>
+          </Link>
+          <Link href={`/listings/${listing?._id}`}>
           <Button
-            disabled={product?.stock === 0}
+            disabled={listing?.bedrooms === 0}
             variant="outline"
             size="sm"
-            className="w-8 h-8 p-0 flex items-center justify-center rounded-full"
+            className="w-32"
           >
-            <ShoppingCart />
+           View Details
           </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-8 h-8 p-0 flex items-center justify-center rounded-full"
-          >
-            <Heart />
-          </Button>
+          </Link>
+         
         </div>
       </CardFooter>
+
     </Card>
   );
 };

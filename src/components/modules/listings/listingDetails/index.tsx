@@ -1,21 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { IProduct } from "@/types";
-import { Star } from "lucide-react";
+
+import { IListing } from "@/types/listing";
+
 import Image from "next/image";
 
-const ProductDetails = ({ product }: { product: IProduct }) => {
+
+const ListingDetails = ({ listing }: { listing: IListing }) => {
   return (
     <div className="grid grid-cols-2 gap-4 border border-white p-4 rounded-md my-5 shadow-sm">
       <div>
         <Image
-          src={product?.imageUrls[0]}
+          src={listing?.images[0]}
           alt="product image"
           width={500}
           height={500}
           className="rounded-md w-full object-cover h-80"
         />
         <div className="grid grid-cols-3 gap-4 mt-5">
-          {product?.imageUrls.slice(0, 3).map((image: string, idx: number) => (
+          {listing?.images.slice(0, 3).map((image: string, idx: number) => (
             <Image
               key={idx}
               src={image}
@@ -28,14 +30,14 @@ const ProductDetails = ({ product }: { product: IProduct }) => {
         </div>
       </div>
       <div className="bg-white rounded-md p-4">
-        <h2 className="font-bold text-xl mb-4">{product?.name}</h2>
+        <h2 className="font-bold text-xl mb-4">{listing?.location}</h2>
         <p className="text-justify text-gray-500 font-light text-sm">
-          {product?.description}
+          {listing?.description}
         </p>
-        <div className="flex items-center justify-between my-5 text-gray-500 text-xs">
+        {/* <div className="flex items-center justify-between my-5 text-gray-500 text-xs">
           <p className="rounded-full px-4 py-1 bg-gray-100 flex items-center justify-center gap-1">
             <Star className="w-4 h-4" fill="orange" stroke="orange" />
-            {product?.averageRating} Ratings
+            {listing?.averageRating} Ratings
           </p>
           <p className="rounded-full px-4 py-1 bg-gray-100">
             Stock: {product?.stock}
@@ -46,19 +48,19 @@ const ProductDetails = ({ product }: { product: IProduct }) => {
           <p className="rounded-full px-4 py-1 bg-gray-100">
             Category: {product?.category?.name}
           </p>
-        </div>
+        </div> */}
         <hr />
         <p className="my-2 font-bold">
           Price:{" "}
-          {product?.offerPrice ? (
+          {listing?.rentAmount ? (
             <>
               <span className="font-semibold mr-2 text-orange-400">
-                $ {product?.offerPrice}
+                $ {listing?.rentAmount}
               </span>
-              <del className="font-semibold text-xs">$ {product?.price}</del>
+              <del className="font-semibold text-xs">$ {listing?.rentAmount}</del>
             </>
           ) : (
-            <span className="font-semibold">$ {product?.price}</span>
+            <span className="font-semibold">$ {listing?.rentAmount}</span>
           )}
         </p>
         <hr />
@@ -72,4 +74,4 @@ const ProductDetails = ({ product }: { product: IProduct }) => {
   );
 };
 
-export default ProductDetails;
+export default ListingDetails;

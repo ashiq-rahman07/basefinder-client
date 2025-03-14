@@ -11,9 +11,11 @@ import Link from "next/link";
 // } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
 import Image from "next/image";
-import Logo from '@/assets/houselogo.png'
+import Logo from '@/assets/logonew.png'
+// import logoSvg from '@/assets/logo.svg'
 // import { useUser } from "@/context/UserContext";
 import DropDown from "./DropDown";
+// import Logo2 from "@/assets/svgs/Logo2";
 
 export default function Navbar2() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,17 +27,19 @@ export default function Navbar2() {
 
  
 
-  return (
-    <nav className="bg-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="/" className="text-xl font-bold text-blue-600">
-            <Image src={Logo} alt="house" width={100} height={100} className="w-32 h-32"/>
-          </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex space-x-6">
+  return (
+    <header className="bg-white border-b w-full">
+      {/* <nav className=""> */}
+        <div className="flex justify-between items-center container shadow-md mx-auto h-16 px-6">
+          {/* Logo */}
+          <div className="flex justify-center items-center gap-4">
+          <Link href="/" className="">
+            <Image src={Logo} alt="house" width={100} height={100} className=""/>
+            
+          </Link>
+           {/* Desktop Navigation Links */}
+           <div className="hidden md:flex space-x-6">
             <Link href="/" className="text-gray-700 hover:text-blue-600">
               Home
             </Link>
@@ -49,7 +53,10 @@ export default function Navbar2() {
               Contact
             </Link>
           </div>
+          </div>
+         
 
+        
           {/* Authentication Menu */}
           <DropDown/>
           {/* <div className="hidden md:flex items-center space-x-4">
@@ -124,7 +131,7 @@ export default function Navbar2() {
             </div>
           </div>
         )}
-      </div>
-    </nav>
+      {/* </nav> */}
+    </header>
   );
 }

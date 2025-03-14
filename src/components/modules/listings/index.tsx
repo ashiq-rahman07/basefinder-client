@@ -1,8 +1,10 @@
 import ProductCard from "@/components/ui/core/ProductCard";
-import { IProduct } from "@/types";
-import FilterSidebar from "./filterSidebar";
 
-const AllListings = ({ products }: { products: IProduct[] }) => {
+import FilterSidebar from "./filterSidebar";
+import { IListing } from "@/types/listing";
+
+
+const AllListings = ({ listings }: { listings: IListing[] }) => {
   return (
     <div className="flex gap-8 my-10">
       <div className="w-full max-w-sm">
@@ -10,8 +12,8 @@ const AllListings = ({ products }: { products: IProduct[] }) => {
       </div>
       <div>
         <div className="grid grid-cols-3 gap-8">
-          {products?.map((product: IProduct, idx: number) => (
-            <ProductCard key={idx} product={product} />
+          {listings?.map((listing: IListing, idx: number) => (
+            <ProductCard key={idx} listing={listing} />
           ))}
         </div>
       </div>
