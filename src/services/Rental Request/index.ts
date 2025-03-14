@@ -22,3 +22,73 @@ export const submitListing = async (requestData:IRequestData) => {
     return Error(error);
   }
 };
+
+export const getRentRequest = async (tenantId?: string,listingId?:string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-request?tenantId=${tenantId}&listingId=${listingId}`,
+      {
+          method: "GET",
+          headers: {
+            Authorization: (await cookies()).get("accessToken")!.value,
+          },
+          next: {
+              tags: ["RENTREQUEST"],
+            },
+      }
+        
+    );
+    const data = await res.json();
+ 
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+
+export const getRentReqListTent = async (listingId?:string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-request/${listingId}`,
+      {
+          method: "GET",
+          headers: {
+            Authorization: (await cookies()).get("accessToken")!.value,
+          },
+          next: {
+              tags: ["RENTREQUEST"],
+            },
+      }
+        
+    );
+    const data = await res.json();
+ 
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+export const getAllReqTenant = async (page?: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-request/tenant?page=${page}`,
+      {
+          method: "GET",
+          headers: {
+            Authorization: (await cookies()).get("accessToken")!.value,
+          },
+          next: {
+              tags: ["RENTREQUEST"],
+            },
+      }
+        
+    );
+    const data = await res.json();
+ 
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+
+

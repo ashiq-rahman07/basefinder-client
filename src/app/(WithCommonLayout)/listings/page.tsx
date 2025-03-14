@@ -23,6 +23,7 @@ const AllProductsPage = async ({
   const listings = data?.result
   console.log(listings)
 
+  
   return (
  
    <div>

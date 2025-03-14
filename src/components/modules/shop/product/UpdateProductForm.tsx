@@ -91,6 +91,7 @@ export default function UpdateProductForm({ product }: { product: IProduct }) {
   const addFeatures = () => {
     appendFeatures({ value: "" });
   };
+  
 
   const { append: appendSpec, fields: specFields } = useFieldArray({
     control: form.control,

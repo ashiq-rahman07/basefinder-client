@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
-//   FieldValues,
+  FieldValues,
 //   SubmitHandler,
    useForm,
 } from "react-hook-form";
@@ -33,9 +33,13 @@ import Image from "next/image";
 import { IUser } from "@/types";
 // import { toast } from "sonner";
 // import { submitListing } from "@/services/Rental Request";
-
+// interface IRentalRequest{
+//   name:string;
+//   email:string;
+//   message: string
+// }
 interface RentalRequestFormProps {
-    onSubmit: (data: { name:string,email:string,message: string }) => Promise<void>;
+    onSubmit: (data:FieldValues) => Promise<void>;
     userInfo:{
         user:IUser | null,
         isLoading: boolean
