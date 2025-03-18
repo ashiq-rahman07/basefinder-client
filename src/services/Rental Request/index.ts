@@ -1,10 +1,12 @@
 "use server";
+// import { IRentalRequest } from "@/types";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 interface IRequestData {
     listingId:string,
     message:string
 }
+
 export const submitListing = async (requestData:IRequestData) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rental-request`, {
@@ -15,6 +17,23 @@ export const submitListing = async (requestData:IRequestData) => {
         Authorization: (await cookies()).get("accessToken")!.value,
       },
       body: JSON.stringify(requestData),
+    });
+    revalidateTag("RENTREQUEST");
+    return res.json();
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+export const updateRequestData = async (requestId:string,updateDta:{ status: string; landlordPhone?: string }) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/rental-request/status/${requestId}`, {
+      method: "PATCH",
+      
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      body: JSON.stringify(updateDta),
     });
     revalidateTag("RENTREQUEST");
     return res.json();
@@ -72,6 +91,28 @@ export const getAllReqTenant = async (page?: string) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-request/tenant?page=${page}`,
+      {
+          method: "GET",
+          headers: {
+            Authorization: (await cookies()).get("accessToken")!.value,
+          },
+          next: {
+              tags: ["RENTREQUEST"],
+            },
+      }
+        
+    );
+    const data = await res.json();
+ 
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+export const getAllLandListingReq = async (page?: string) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-request/landlord?page=${page}`,
       {
           method: "GET",
           headers: {

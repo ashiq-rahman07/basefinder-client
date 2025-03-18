@@ -13,7 +13,7 @@ const ProductDetailsPage = async ({
   const { listingId } = await params;
 
   const { data: listing } = await getSingleListing(listingId);
-
+  console.log('listing data: ', listing);
   return (
     <NMContainer>
       <ListingBanner

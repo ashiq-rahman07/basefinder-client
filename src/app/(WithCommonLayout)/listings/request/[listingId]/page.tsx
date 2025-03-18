@@ -11,8 +11,9 @@ const RenRequestPage = async({
   params: Promise<{ listingId: string }>;
 }) => {
   const { listingId } = await params;
-  
+  console.log(listingId);
     const { data: listing } = await getSingleListing(listingId);
+    
     
   return (
     <>

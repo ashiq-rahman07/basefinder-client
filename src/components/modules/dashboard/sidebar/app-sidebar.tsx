@@ -79,6 +79,13 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
       ],
     },
     {
+      title: "Request Management",
+      url: '/landlord/my-listing-request',
+      icon: List,
+      roles: ["landlord"], 
+     
+    },
+    {
       title: "My Request",
       url: "/tenant/my-request",
       icon: MessageSquare,

@@ -60,6 +60,7 @@ const RentalRequestDetails: React.FC<RentalRequestPageProps> = ({ listing }) => 
 };
 
 
+
   useEffect(() => {
     fetchData();
 });

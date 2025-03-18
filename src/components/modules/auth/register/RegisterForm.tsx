@@ -18,6 +18,7 @@ import { registrationSchema } from "./registerValidation";
 import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { Select,SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const form = useForm({
@@ -31,6 +32,7 @@ export default function RegisterForm() {
   const password = form.watch("password");
   const passwordConfirm = form.watch("passwordConfirm");
   //   console.log(password, passwordConfirm);
+   const router = useRouter();
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     // console.log(data)
@@ -38,6 +40,7 @@ export default function RegisterForm() {
       const res = await registerUser(data);
       if (res?.success) {
         toast.success(res?.message);
+        router.push('/login')
       } else {
         toast.error(res?.message);
       }

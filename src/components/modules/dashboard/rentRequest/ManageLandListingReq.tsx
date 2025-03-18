@@ -4,17 +4,18 @@ import { NMTable } from "@/components/ui/core/NMTable/index";
 import { ColumnDef } from "@tanstack/react-table";
 import {  Eye, Trash } from "lucide-react";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 // import { Button } from "@/components/ui/button";
 
 import EmptyItems from "@/components/shared/EmptyItems";
 import { IRentalRequest } from "@/types";
 
-const ManageTenantRequest = ({ requests }: { requests: IRentalRequest[] }) => {
-  const router = useRouter();
+const ManageLandListingReq = ({ requests }: { requests: IRentalRequest[] }) => {
+  // const router = useRouter();
+  console.log(requests);
 
   const handleView = (id:string) => {
-    router.push(`/listings/request/${id}`)
+    console.log("Viewing product:", id);
   };
 
   const handleDelete = (productId: string) => {
@@ -54,7 +55,7 @@ const ManageTenantRequest = ({ requests }: { requests: IRentalRequest[] }) => {
           <button
             className="text-gray-500 hover:text-blue-500"
             title="View"
-            onClick={() => handleView(row.original.listingId._id)}
+            onClick={() => handleView(row.original._id)}
           >
             <Eye className="w-5 h-5" />
           </button>
@@ -93,4 +94,4 @@ const ManageTenantRequest = ({ requests }: { requests: IRentalRequest[] }) => {
   );
 };
 
-export default ManageTenantRequest;
+export default ManageLandListingReq;
