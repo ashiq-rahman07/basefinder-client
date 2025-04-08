@@ -47,6 +47,7 @@ const ProductCard = ({ listing }: { listing: IListing }) => {
               : listing?.name}
           </CardTitle>
           <p className="text-sm text-gray-700 py-2">{listing?.location}</p>
+          <p className="text-sm text-gray-700 py-2">Rent Amount: {listing?.rentAmount}/month</p>
         </Link>
 
         <div className="flex items-center  gap-4 my-2">
@@ -65,6 +66,7 @@ const ProductCard = ({ listing }: { listing: IListing }) => {
             </span>
           </div>
         </div>
+        
       </CardContent>
      
 

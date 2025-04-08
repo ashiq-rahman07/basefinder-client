@@ -2,7 +2,7 @@
 import Logo from '@/assets/logonew.png';
 import { IListing } from '@/types/listing';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import {
     Form,
@@ -12,14 +12,14 @@ import {
     FormLabel,
     FormMessage,
   } from "@/components/ui/form";
-import { getRentReqListTent, submitListing } from '@/services/Rental Request';
+import {  submitListing } from '@/services/Rental Request';
 import { toast } from 'sonner';
 // import { Input } from '@/components/ui/input';
 import { IRentalRequest } from '@/types';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Bath, BedDouble} from "lucide-react";
-import Spinner from '@/components/shared/Spinner';
+// import Spinner from '@/components/shared/Spinner';
 // import { useRouter } from "next/navigation";
 
 
@@ -27,56 +27,56 @@ import Spinner from '@/components/shared/Spinner';
 
 interface RentalRequestPageProps {
   listing: IListing;
- 
+ requestData :IRentalRequest
 }
 
 
-const RentalRequestDetails: React.FC<RentalRequestPageProps> = ({ listing }) => {
+const RentalRequestDetails: React.FC<RentalRequestPageProps> = ({ listing,requestData }) => {
   
  
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-  const [requestStatus, setRequestStatus] = useState<'Pending' | 'Approved' | 'Rejected' | null>(null);
-  const [loading, setLoading] =useState(true);
-  const [requestData, setRequestData] =useState<IRentalRequest | null>(null) 
+  // const [requestStatus, setRequestStatus] = useState<'Pending' | 'Approved' | 'Rejected' | null>(null);
+  // const [loading, setLoading] =useState(true);
+  // const [requestData, setRequestData] =useState<IRentalRequest | null>(null) 
   
-  const fetchData = async () => {
-    try {
-      const { data } = await getRentReqListTent(listing?._id);
+//   const fetchData = async () => {
+//     try {
+//       const { data } = await getRentReqListTent(listing?._id);
 
-          if (data) {
-            setRequestData(data); // Set requestData
-            setRequestStatus(data.status); // Set requestStatus
-          } else {
-            setRequestStatus(null); // No request found
-          }    
+//           if (data) {
+//             setRequestData(data); // Set requestData
+//             setRequestStatus(data.status); // Set requestStatus
+//           } else {
+//             setRequestStatus(null); // No request found
+//           }    
     
-        } catch (error:any) {
-          console.error('Error fetching rental request:', error);
-          toast.error(error.message)
+//         } catch (error:any) {
+//           console.error('Error fetching rental request:', error);
+//           toast.error(error.message)
             
-  } finally {
-    setLoading(false); // Set loading to false after fetching data
-  }
-};
+//   } finally {
+//     setLoading(false); // Set loading to false after fetching data
+//   }
+// };
 
 
 
-  useEffect(() => {
-    fetchData();
-});
+//   useEffect(() => {
+//     fetchData();
+// });
 
 const form = useForm({defaultValues: {message:""}});
 const {formState: { isSubmitting }} = form;
 
 const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
-  const requestData = {
+  const requestFormData = {
       status:"Pending",
       listingId:listing._id,
       message:data.message as string
     }
   try {
-    const res = await submitListing(requestData);
+    const res = await submitListing(requestFormData);
 
     if (res.success) {
      
@@ -92,9 +92,9 @@ const onSubmit: SubmitHandler<FieldValues> = async (data) => {
   }
 };
 
-if(loading){
-  return <Spinner/>
-}
+// if(loading){
+//   return <Spinner/>
+// }
   
  return (
     <div className="container mx-auto p-6">
@@ -134,27 +134,27 @@ if(loading){
 
         {/* Right Side: Rental Request Form */}
         <div className="bg-white w-full md:w-1/2  mx-auto px-6 pb-4  rounded-lg shadow-md">
-        {requestData && !loading &&  (
+        {requestData &&  (
               // Status Section
               <div className="space-y-4 mt-4">
                 <h2 className="text-2xl font-semibold text-center text-gray-700 mb-4">Request Status</h2>
               <div
                   className={`p-4 rounded-lg ${
-                    requestData.status === 'Approved'
+                    requestData?.status === 'Approved'
                       ? 'bg-green-100 text-green-800'
-                      : requestData.status === 'Rejected'
+                      : requestData?.status === 'Rejected'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-blue-100 text-blue-800'
                   }`}
                 >
                   <p className="font-semibold">Status: {requestData.status}</p>
-                  {requestData.status === 'Rejected' &&  (
+                  {requestData?.status === 'Rejected' &&  (
                     <p className="mt-2"> Your Request Rejected Landlord When Update or Cancel This status You Can again Submit Request</p>
                   )}
-                  {requestData.status === 'Pending' &&  (
+                  {requestData?.status === 'Pending' &&  (
                     <p className="mt-2"> Your Request Status Now Pending.Please wait Landlord review your request. He Approved or Reject your Request. please wait...</p>
                   )}
-                  {requestData.status === 'Approved' && requestData.message && (
+                  {requestData?.status === 'Approved' && requestData.message && (
                     <p className="mt-2">Message: Your Request Approved Please Follow Payment procedure</p>
                   )}
                 </div> 
@@ -222,7 +222,7 @@ if(loading){
         }
           
         </div>
-       {requestStatus === 'Approved' && (
+       {requestData?.status === 'Approved' && (
         <div>
             <Button
                     type="button"

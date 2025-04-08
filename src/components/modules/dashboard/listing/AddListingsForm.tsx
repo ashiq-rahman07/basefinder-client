@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import {
   FieldValues,
   SubmitHandler,
+   useFieldArray,
    useForm,
 } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
@@ -30,6 +31,7 @@ import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { getAllCategories } from "@/services/Category";
 import { addListing } from "@/services/listing";
+import { Plus } from "lucide-react";
 
 export default function AddListingsForm() {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -47,13 +49,21 @@ export default function AddListingsForm() {
       category: "",
       bedrooms: "",
       bathrooms: "",
+      amenities: [{ value: "" }],
     },
   });
 
   const {
     formState: { isSubmitting },
   } = form;
+  const { append: appendAmenities, fields: featureFields } = useFieldArray({
+    control: form.control,
+    name: "amenities",
+  });
 
+  const addAmenities = () => {
+    appendAmenities({ value: "" });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,15 +80,19 @@ export default function AddListingsForm() {
   }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const addAmenities = data.amenities.map(
+      (amenity: { value: string }) => amenity.value
+    );
 
     const modifiedData = {
       ...data,
+      amenities:addAmenities,
       rentAmount: parseInt(data.rentAmount),
       bedrooms: parseInt(data.bedrooms),
       bathrooms: parseInt(data.bathrooms),
     
     };
-
+console.log(modifiedData);
     const formData = new FormData();
     formData.append("data", JSON.stringify(modifiedData));
 
@@ -87,6 +101,7 @@ export default function AddListingsForm() {
     }
     try {
       const res = await addListing(formData);
+
 
       if (res.success) {
         toast.success(res.message);
@@ -207,6 +222,39 @@ export default function AddListingsForm() {
               )}
             />
             
+          </div>
+          <div>
+            <div className="flex justify-between items-center border-t border-b py-3 my-5">
+              <p className="text-primary font-bold text-xl"> Add Amenities</p>
+              <Button
+                onClick={addAmenities}
+                variant="outline"
+                className="size-10"
+                type="button"
+              >
+                <Plus className="text-primary" />
+              </Button>
+            </div>
+
+            <div className="my-5">
+              {featureFields.map((featureField, index) => (
+                <div key={featureField.id}>
+                  <FormField
+                    control={form.control}
+                    name={`amenities.${index}.value`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Key Feature {index + 1}</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value || ""} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
           <div className="my-5">
             <FormField

@@ -10,6 +10,8 @@
       name:string,
       email:string
     };
+    moveDate: Date;
+    rentDuration:string;
     message: string;
     paymentStatus: "Pending" | "Completed" | "Failed";
     status: "Pending" | "Approved" | "Rejected";

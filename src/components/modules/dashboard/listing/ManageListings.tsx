@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { IListing } from "@/types/listing";
 import EmptyItems from "@/components/shared/EmptyItems";
+import { deleteListing } from "@/services/listing";
 
 const ManageListings = ({ listings }: { listings: IListing[] }) => {
   const router = useRouter();
@@ -16,8 +17,14 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
     console.log("Viewing product:", id);
   };
 
-  const handleDelete = (productId: string) => {
+  const handleDelete = async(productId: string) => {
     console.log("Deleting product with ID:", productId);
+    try {
+      const{data} = await deleteListing(productId)
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const columns: ColumnDef<IListing>[] = [

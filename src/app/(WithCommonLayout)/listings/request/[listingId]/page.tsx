@@ -3,6 +3,7 @@ import RentalRequestDetails from '@/components/modules/request/RentalRequestDeta
 // import { useUser } from '@/context/UserContext';
 // import { getCurrentUser } from '@/services/AuthService';
 import { getSingleListing } from '@/services/listing';
+import { getRentReqListTent } from '@/services/Rental Request';
 import React from 'react'
 
 const RenRequestPage = async({
@@ -11,14 +12,15 @@ const RenRequestPage = async({
   params: Promise<{ listingId: string }>;
 }) => {
   const { listingId } = await params;
-  console.log(listingId);
+  // console.log(listingId);
     const { data: listing } = await getSingleListing(listingId);
+
     
-    
+    const {data:requestData}= await getRentReqListTent(listing?._id);
   return (
     <>
     
-   <RentalRequestDetails  listing={listing}/>
+   <RentalRequestDetails requestData = {requestData}  listing={listing}/>
     
     
     </>

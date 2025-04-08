@@ -14,6 +14,8 @@ import {
   FieldValues,
   SubmitHandler,
  
+  useFieldArray,
+ 
   useForm,
 } from "react-hook-form";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,6 +40,7 @@ import { toast } from "sonner";
 // import { updateProduct } from "@/services/Product";
 import { IListing } from "@/types/listing";
 import { updateListing } from "@/services/listing";
+import { Plus } from "lucide-react";
 
 export default function UpdateListingForm({ listing }: { listing: IListing }) {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -59,14 +62,23 @@ export default function UpdateListingForm({ listing }: { listing: IListing }) {
       category:listing?.category?.name || "",
       bedrooms:listing?.bedrooms || "",
       bathrooms:listing?.bathrooms || "",
+      amenities:listing?.amenities?.map((amenity) => ({
+        value: amenity,
+      })) || [{ value: "" }],
     },
   });
 
-  const {
+ const {
     formState: { isSubmitting },
   } = form;
+  const { append: appendAmenities, fields: featureFields } = useFieldArray({
+    control: form.control,
+    name: "amenities",
+  });
 
-
+  const addAmenities = () => {
+    appendAmenities({ value: "" });
+  };
 
 
 
@@ -227,7 +239,39 @@ console.log(modifiedData)
             />
             
           </div>
+          <div>
+            <div className="flex justify-between items-center border-t border-b py-3 my-5">
+              <p className="text-primary font-bold text-xl"> Add Amenities</p>
+              <Button
+                onClick={addAmenities}
+                variant="outline"
+                className="size-10"
+                type="button"
+              >
+                <Plus className="text-primary" />
+              </Button>
+            </div>
 
+            <div className="my-5">
+              {featureFields.map((featureField, index) => (
+                <div key={featureField.id}>
+                  <FormField
+                    control={form.control}
+                    name={`amenities.${index}.value`}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Key Feature {index + 1}</FormLabel>
+                        <FormControl>
+                          <Input {...field} value={field.value || ""} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
           <div className="my-5">
             <FormField
               control={form.control}

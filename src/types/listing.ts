@@ -14,6 +14,7 @@
       _id: string;
       name: string;
     };
+    amenities:string[];
     images: string[];
     isAvailable: boolean;
     createdAt: string;
