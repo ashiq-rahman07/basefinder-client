@@ -11,6 +11,10 @@ import { IRentalRequest } from "@/types";
 import { useUser } from "@/context/UserContext";
 import Spinner from "@/components/shared/Spinner";
 import { Bath, BedDouble } from "lucide-react";
+import { createPayment } from "@/services/payment";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+// import Link from "next/link";
 
 interface RentalRequestPageProps {
   listing: IListing;
@@ -19,6 +23,33 @@ interface RentalRequestPageProps {
 
 const ListingDetails: React.FC<RentalRequestPageProps> = ({ listing,requestData }) => {
    const { user,isLoading } = useUser();
+ const router = useRouter();
+if(!listing && !requestData){
+  return <p>Loading</p>
+}
+   const handlePayment = async()=>{
+
+    const paymentData = {
+      listingId:listing?._id,
+    rentAmount:listing?.rentAmount
+    }
+    console.log(paymentData);
+    try {
+      const payment = await createPayment(paymentData) ;
+      console.log(payment);
+      if (payment?.success) {
+        toast.success("Payment Processing");
+        router.push(`${payment?.data}`)
+      } else {
+        toast.error(payment?.message);
+      }
+     
+
+   
+    } catch (err: any) {
+      console.error(err);
+    }
+   }
   
   return (
     <div className="grid grid-cols-2 gap-4 border border-white p-4 rounded-md my-5 shadow-sm">
@@ -122,7 +153,7 @@ const ListingDetails: React.FC<RentalRequestPageProps> = ({ listing,requestData 
         {requestData?.status === 'Approved' && (
         <div>
             <Button
-                    type="button"
+             onClick={handlePayment}
                     className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                 >
                     Proceed to Payment

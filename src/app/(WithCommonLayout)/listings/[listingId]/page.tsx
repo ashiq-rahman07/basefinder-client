@@ -3,6 +3,7 @@ import ListingBanner from "@/components/modules/listings/banner";
 import ListingDetails from "@/components/modules/listings/listingDetails";
 // import NMContainer from "@/components/ui/core/NMContainer";
 import { getSingleListing } from "@/services/listing";
+import { getSinglePayment } from "@/services/payment";
 import { getRentReqListTent } from "@/services/Rental Request";
 
 
@@ -14,8 +15,10 @@ const ProductDetailsPage = async ({
   const { listingId } = await params;
 
   const { data: listing } = await getSingleListing(listingId);
-  console.log('listing data: ', listing);
+
   const {data:requestData}= await getRentReqListTent(listing?._id);
+  const {data:paymentData} = await getSinglePayment(listingId)
+  console.log(paymentData);
   return (
    
 <div>
