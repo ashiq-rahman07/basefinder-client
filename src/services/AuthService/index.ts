@@ -46,7 +46,7 @@ export const loginUser = async (userData: FieldValues) => {
 
       // Decode the access token to get user data
       const decodedUser = jwtDecode(result?.data?.accessToken);
-      console.log('logindecoded', decodedUser)
+      
       return decodedUser; // Return the decoded user data
     }
     return null;
@@ -88,4 +88,43 @@ export const reCaptchaTokenVerification = async (token: string) => {
 export const logout = async () => {
   (await cookies()).delete("accessToken");
 
+};
+
+export const updateProfile = async (userData: FieldValues) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/update-profile`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await res.json();
+
+
+   
+    return result;
+  } catch (error: any) {
+    return Error(error);
+  }
+};
+export const changePassword = async (userData: FieldValues) => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/auth/change-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: (await cookies()).get("accessToken")!.value,
+      },
+      body: JSON.stringify(userData),
+    });
+    const result = await res.json();
+
+
+   
+    return result;
+  } catch (error: any) {
+    return Error(error);
+  }
 };

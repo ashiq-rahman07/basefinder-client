@@ -13,7 +13,7 @@
     moveDate: Date;
     rentDuration:string;
     message: string;
-    paymentStatus: "Pending" | "Completed" | "Failed";
+    paymentStatus: "Pending" | "Paid" | "Failed";
     status: "Pending" | "Approved" | "Rejected";
     landlordPhone?: string;
     createdAt: string;

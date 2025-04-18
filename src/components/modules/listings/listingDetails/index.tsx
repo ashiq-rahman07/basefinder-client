@@ -50,6 +50,7 @@ if(!listing && !requestData){
       console.error(err);
     }
    }
+
   
   return (
     <div className="grid grid-cols-2 gap-4 border border-white p-4 rounded-md my-5 shadow-sm">
@@ -129,7 +130,11 @@ if(!listing && !requestData){
                   }`}
                 >
                   <p className="font-semibold">Status: {requestData.status}</p>
-                  {requestData?.status === 'Rejected' &&  (
+                  {requestData?.paymentStatus === 'Paid' ?(
+                       <p className="mt-2"> Your Rent Amount Succesfully Paid For This Listing.</p>
+                  ):
+                  <>
+                     {requestData?.status === 'Rejected' &&  (
                     <p className="mt-2"> Your Request Rejected Landlord When Update or Cancel This status You Can again Submit Request</p>
                   )}
                   {requestData?.status === 'Pending' &&  (
@@ -138,6 +143,11 @@ if(!listing && !requestData){
                   {requestData?.status === 'Approved' && requestData.message && (
                     <p className="mt-2">Message: Your Request Approved Please Follow Payment procedure</p>
                   )}
+                  </>
+                  
+                  }
+                 
+               
                 </div> 
               </div>
             )} 
@@ -150,7 +160,7 @@ if(!listing && !requestData){
        { user &&  requestData == null &&
           <CreateRequestModal listingId ={listing?._id}/>
         }
-        {requestData?.status === 'Approved' && (
+        {requestData?.status === 'Approved' && requestData.paymentStatus === "Pending"  && (
         <div>
             <Button
              onClick={handlePayment}
