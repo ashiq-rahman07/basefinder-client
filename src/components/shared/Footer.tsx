@@ -1,4 +1,5 @@
-// components/Footer.tsx
+
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -40,19 +41,19 @@ export default function Footer() {
         {/* Contact Info */}
         <div>
           <h3 className="text-white text-lg font-semibold mb-3">Contact Us</h3>
-          <p className="text-sm">Email: support@basafinder.com</p>
-          <p className="text-sm mt-1">Phone: +1 (123) 456-7890</p>
+          <p className="text-sm">Email: support@housesolution.com</p>
+          <p className="text-sm mt-1">Phone: +880-1727504474</p>
           <div className="flex mt-4 space-x-4">
-            <a href="#"><Image src="/icons/facebook.svg" alt="Facebook" width={24} height={24} /></a>
-            <a href="#"><Image src="/icons/instagram.svg" alt="Instagram" width={24} height={24} /></a>
-            <a href="#"><Image src="/icons/linkedin.svg" alt="LinkedIn" width={24} height={24} /></a>
+            <Link href="#"><Facebook /></Link>
+            <Link href="#"> <Linkedin/></Link>
+            <Link href="#"><Instagram /></Link>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div className="mt-12 border-t border-gray-700 pt-6 text-sm text-center">
-        © {new Date().getFullYear()} BasaFinder. All rights reserved.
+        © {new Date().getFullYear()} House Solution. All rights reserved.
       </div>
     </footer>
   );

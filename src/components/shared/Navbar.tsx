@@ -1,100 +1,90 @@
-"use client";
-import Logo from "@/assets/svgs/Logo";
-import { Button } from "../ui/button";
-import { Heart, LogOut, ShoppingBag } from "lucide-react";
+"use client"; // Required for interactivity (e.g., useState)
+
+import { useState } from "react";
 import Link from "next/link";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { logout } from "@/services/AuthService";
-import { useUser } from "@/context/UserContext";
-import { usePathname, useRouter } from "next/navigation";
-import { protectedRoutes } from "@/contants";
+
+import { Menu } from "lucide-react";
+import Image from "next/image";
+import Logo from '@/assets/logonew.png'
+
+import DropDown from "./DropDown";
 
 export default function Navbar() {
-  const { user, setIsLoading } = useUser();
-  const pathname = usePathname();
-  const router = useRouter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleLogOut = () => {
-    logout();
-    setIsLoading(true);
-    if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
-    }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
-  
+
+ 
+
 
   return (
-    <header className="border-b w-full">
-      <div className="container flex justify-between items-center mx-auto h-16 px-3">
-        <Link href="/">
-          <h1 className="text-2xl font-black flex items-center">
-            <Logo /> Next Mart
-          </h1>
-        </Link>
-        <div className="max-w-md  flex-grow">
-          <input
-            type="text"
-            placeholder="Search for products"
-            className="w-full max-w-6xl border border-gray-300 rounded-full py-2 px-5"
-          />
-        </div>
-        <nav className="flex gap-2">
-          <Button variant="outline" className="rounded-full p-0 size-10">
-            <Heart />
-          </Button>
-          <Button variant="outline" className="rounded-full p-0 size-10">
-            <ShoppingBag />
-          </Button>
-
-          {user ? (
-            <>
-              <Link href="/create-shop">
-                <Button className="rounded-full">Create Shop</Button>
-              </Link>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger>
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>User</AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Link href={`/${user?.role}/dashboard`}>Dashboard</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>My Shop</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    className="bg-red-500 cursor-pointer"
-                    onClick={handleLogOut}
-                  >
-                    <LogOut />
-                    <span>Log Out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </>
-          ) : (
-            <Link href="/login">
-              <Button className="rounded-full" variant="outline">
-                Login
-              </Button>
+    <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+      {/* <nav className=""> */}
+        <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex justify-between items-center   py-2 ">
+          {/* Logo */}
+         
+          <Link href="/" className="">
+            <Image src={Logo} alt="house" width={100} height={100} className=""/>
+            
+          </Link>
+           {/* Desktop Navigation Links */}
+           <div className="hidden md:flex space-x-6">
+            <Link href="/" className="text-slate-700 hover:text-emerald-500">
+              Home
             </Link>
-          )}
-        </nav>
-      </div>
+            <Link href="/listings" className="text-slate-700 hover:text-emerald-500">
+              Listings
+            </Link>
+            <Link href="/about" className="text-slate-700 hover:text-emerald-500">
+              About
+            </Link>
+            <Link href="/contact" className="text-slate-700 hover:text-emerald-500">
+              Contact
+            </Link>
+          </div>
+         
+         
+
+        
+          {/* Authentication Menu */}
+          <DropDown/>
+       
+          {/* Mobile Menu Toggle */}
+          <button onClick={toggleMenu} className="md:hidden p-2">
+            <Menu className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white">
+            <div className="flex flex-col space-y-4 p-4">
+              <Link href="/" className="text-gray-700 hover:text-blue-600">
+                Home
+              </Link>
+              <Link href="/listings" className="text-gray-700 hover:text-blue-600">
+                Listings
+              </Link>
+              <Link href="/about" className="text-gray-700 hover:text-blue-600">
+                About
+              </Link>
+              <Link href="/contact" className="text-gray-700 hover:text-blue-600">
+                Contact
+              </Link>
+              <div className="flex flex-col space-y-2">
+                <Link href="/login" className="text-gray-700 hover:text-blue-600">
+                  Login
+                </Link>
+                <Link href="/register" className="text-gray-700 hover:text-blue-600">
+                  Register
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+      {/* </nav> */}
     </header>
   );
 }
