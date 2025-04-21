@@ -1,21 +1,20 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
+
+import { IListing } from "@/types/listing";
 import Image from "next/image";
 
-export function ListingCard() {
+export function ListingCard({ listing }: { listing: IListing }) {
   return (
-    <Card>
-      <CardHeader>
-        <Image src={`https://cdn.britannica.com/05/157305-004-53D5D212.jpg`} width={100} height={100} alt="Property"  className="w-full h-48 object-cover rounded-t-lg" />
-      </CardHeader>
-      <CardContent>
-        <CardTitle className="text-xl">Cozy Apartment in Downtown</CardTitle>
-        <CardDescription className="mt-2">$1200/month</CardDescription>
-        <CardDescription className="mt-1">New York, NY</CardDescription>
-      </CardContent>
-      <CardFooter>
-        <Button className="w-full">View Details</Button>
-      </CardFooter>
-    </Card>
+    <div  className="bg-white rounded-2xl shadow p-4 hover:shadow-lg transition">
+             <Image src={`/house4.jpeg`} alt='house'  width={400}
+     height={250} className="w-full h-48 object-cover rounded-xl mb-4" />
+             <h3 className="text-lg font-semibold text-gray-800"> {listing?.name}</h3>
+             <p className="text-gray-500 text-sm">{listing?.location}</p>
+             <p className="text-emerald-600 font-bold mt-2">৳{listing?.rentAmount}/month</p>
+             <div className="flex gap-4 mt-2 text-gray-500 text-sm">
+               <span>🛏 3</span><span>🛁 2</span>
+             </div>
+             <button className="mt-4 w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600">View Details</button>
+           </div>
   );
 }

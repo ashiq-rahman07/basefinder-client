@@ -1,28 +1,22 @@
-// import Category from "@/components/modules/home/Category";
-// import FeaturedProducts from "@/components/modules/home/FeaturedProducts";
-// import HeroSection from "@/components/modules/home/HeroSection";
-// import { ListingCard } from "@/components/modules/home/FeaturedListing/ListingCard";
 
-import CallToAction from "@/components/modules/home/CallToAction";
-import FeaturedSection from "@/components/modules/home/FeaturedListing";
-import HeroSection from "@/components/modules/home/HeroSection";
 import { PropertyTypeSection } from "@/components/modules/home/PropertyTypeSection/PropertyTypeSection";
 import Testimonials from "@/components/modules/home/Testimonials";
 import WhyChooseUs from "@/components/modules/home/WhyChooseUs";
+import CallAction from "@/components/modules/home/CallToAction/CallAction";
+import Hero3 from "@/components/modules/home/HeroSection/Hero3";
+import FeaturedListing from "@/components/modules/home/FeaturedListing/FeaturedListing";
+
+
 
 const HomePage = () => {
   return (
       <>
-    
-      <HeroSection/>
+      <Hero3/>
       <PropertyTypeSection/>
-   
-    
-      <FeaturedSection/>
+      <FeaturedListing/>
       <WhyChooseUs/>
       <Testimonials/>
-
-      <CallToAction/>
+      <CallAction/>
       </>
  
   );

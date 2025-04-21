@@ -29,31 +29,31 @@ export default function Navbar2() {
 
 
   return (
-    <header className="bg-white border-b w-full">
+    <header className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
       {/* <nav className=""> */}
-        <div className="flex justify-between items-center container shadow-md mx-auto h-16 px-6">
+        <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex justify-between items-center   py-2 ">
           {/* Logo */}
-          <div className="flex justify-center items-center gap-4">
+         
           <Link href="/" className="">
             <Image src={Logo} alt="house" width={100} height={100} className=""/>
             
           </Link>
            {/* Desktop Navigation Links */}
            <div className="hidden md:flex space-x-6">
-            <Link href="/" className="text-gray-700 hover:text-blue-600">
+            <Link href="/" className="text-slate-700 hover:text-emerald-500">
               Home
             </Link>
-            <Link href="/listings" className="text-gray-700 hover:text-blue-600">
+            <Link href="/listings" className="text-slate-700 hover:text-emerald-500">
               Listings
             </Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600">
+            <Link href="/about" className="text-slate-700 hover:text-emerald-500">
               About
             </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600">
+            <Link href="/contact" className="text-slate-700 hover:text-emerald-500">
               Contact
             </Link>
           </div>
-          </div>
+         
          
 
         

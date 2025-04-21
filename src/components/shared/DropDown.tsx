@@ -32,7 +32,7 @@ const DropDown = () => {
     <div className="hidden md:flex items-center space-x-4">
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="flex items-center space-x-2">
+        <Button variant="ghost" className="flex items-center space-x-2 bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition">
           <User className="h-5 w-5" />
           <span>Account</span>
         </Button>

@@ -1,34 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider"; // For price range
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"; // For dropdowns
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import React from "react";
 
-export default function HeroSection() {
+const Hero3 = () => {
   return (
-    <div className="relative h-[550px] flex items-center justify-center">
-      {/* Background Image with Blur and Low Opacity */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('https://cdn.britannica.com/05/157305-004-53D5D212.jpg')", // Replace with your image path
-          filter: "blur(1px)", // Apply blur
-          opacity: "0.6", // Apply low opacity
-        }}
-      ></div>
- <div className="absolute inset-0 bg-black/50"></div>
-      {/* Hero Content */}
-      <div className="relative z-10 text-center">
-        <h1 className="text-4xl text-gray-800 font-bold mb-4">Find Your Perfect Rental Home</h1>
-        <p className="text-lg mb-8">Smart housing solutions for landlords and tenants.</p>
-
-        {/* Search Form */}
-        <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <section
+      className="flex flex-col items-center justify-center text-center py-32 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/house1.png')",
+      }}
+    >
+      <div className="bg-black bg-opacity-50 p-6 rounded-xl">
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        Find Your Perfect Rental Home
+        </h2>
+        <p className="text-lg text-center md:text-xl text-gray-200 mb-6 ">
+        Smart housing solutions for landlords and tenants.
+        </p>
+        <div className="bg-gray-600 bg-opacity-40 p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
           <form className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Location Input */}
             <div>
@@ -37,9 +28,9 @@ export default function HeroSection() {
 
             {/* Price Range Slider */}
             <div>
-              <label className="block text-sm font-medium mb-2">Price Range</label>
+              <label className="block text-gray-300 text-sm font-medium mb-2">Price Range</label>
               <Slider defaultValue={[500, 2000]} max={5000} step={100} />
-              <div className="flex justify-between text-sm text-gray-600 mt-2">
+              <div className="flex justify-between text-sm text-gray-300 mt-2">
                 <span>$500</span>
                 <span>$2000</span>
               </div>
@@ -69,6 +60,8 @@ export default function HeroSection() {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
+
+export default Hero3;
