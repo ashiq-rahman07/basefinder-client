@@ -1,7 +1,7 @@
-// app/about/page.tsx
+
 import Image from "next/image";
 
-export default function AboutPage1() {
+export default function AboutPageSection() {
   return (
     <main className="min-h-screen pt-20">
       {/* Section 1: Intro */}

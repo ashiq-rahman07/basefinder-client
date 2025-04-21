@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardFooter,
+
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -70,31 +70,23 @@ const ProductCard = ({ listing }: { listing: IListing }) => {
       </CardContent>
      
 
-          <CardFooter className="block p-0">
-        <div className="flex gap-2 items-center pt-2 justify-between">
-          <Link href={`/listings/request/${listing?._id}`}>
-          <Button
-            disabled={!listing?.isAvailable}
-            size="sm"
-            variant="outline"
-            className="w-32"
-          >
-            Add request
-          </Button>
-          </Link>
+  
+      
+        
           <Link href={`/listings/${listing?._id}`}>
           <Button
             disabled={listing?.bedrooms === 0}
             variant="outline"
             size="sm"
-            className="w-32"
+            className="mt-4 w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600"
           >
            View Details
           </Button>
+        
           </Link>
          
-        </div>
-      </CardFooter>
+     
+   
 
     </Card>
   );

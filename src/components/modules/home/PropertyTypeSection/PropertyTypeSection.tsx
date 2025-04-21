@@ -1,26 +1,8 @@
 import { getAllCategories } from "@/services/Category";
 import { ICategory } from "@/types";
-// {categories}:{categories:ICategory[]}
+
 export const PropertyTypeSection = async() => {
   const { data: categories } = await getAllCategories();
-    // const propertyTypes = [
-    //   {
-    //     title: "Apartments",
-    //     image: "https://cdn.britannica.com/05/157305-004-53D5D212.jpg",
-    //   },
-    //   {
-    //     title: "Houses",
-    //     image: "https://cdn.britannica.com/05/157305-004-53D5D212.jpg",
-    //   },
-    //   {
-    //     title: "Condos",
-    //     image: "https://cdn.britannica.com/05/157305-004-53D5D212.jpg",
-    //   },
-    //   {
-    //     title: "Townhouses",
-    //     image: "https://cdn.britannica.com/05/157305-004-53D5D212.jpg",
-    //   },
-    // ];
   
 
     return (

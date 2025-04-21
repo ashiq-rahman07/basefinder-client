@@ -1,5 +1,5 @@
 "use client"
-// import { Button } from "@/components/ui/button";
+
 
 import { IListing } from "@/types/listing";
 
@@ -14,7 +14,7 @@ import { Bath, BedDouble } from "lucide-react";
 import { createPayment } from "@/services/payment";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-// import Link from "next/link";
+
 
 interface RentalRequestPageProps {
   listing: IListing;
@@ -113,7 +113,7 @@ if(!listing && !requestData){
       
 
        
-        {/* <Button className="my-4">Rent Request</Button> */}
+       
         {isLoading && <Spinner/>}
 
         {requestData &&  (
