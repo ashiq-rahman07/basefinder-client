@@ -1,7 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { addDays, format } from 'date-fns';
+// import { addDays, format } from 'date-fns';
 import {
   Dialog,
   DialogContent,
@@ -46,12 +46,22 @@ const CreateRequestModal: React.FC<modalProps> = ({ listingId }) => {
     formState: { isSubmitting },
   } = form;
 
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  function formatDate(date: Date) {
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
+  
   // Disable all dates before tomorrow
-  const isDateDisabled = (date: Date) => {
-    const today = new Date();
-    const tomorrow = addDays(today, 1); // Tomorrow's date
-    return date < tomorrow; // Disable if date is before tomorrow
-  };
+  // const isDateDisabled = (date: Date) => {
+  //   const today = new Date();
+  //   const tomorrow = addDays(today, 1); // Tomorrow's date
+  //   return date < tomorrow; // Disable if date is before tomorrow
+  // };
   const onSubmit: SubmitHandler<FieldValues> = async data => {
     // console.log(data);
     const requestFormData = {
@@ -97,20 +107,20 @@ const CreateRequestModal: React.FC<modalProps> = ({ listingId }) => {
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'w-[240px] pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground'
-                          )}
-                        >
-                          {field.value ? (
-                            format(field.value, 'MMMM d, yyyy')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
+                      <Button
+                            variant={'outline'}
+                            className={cn(
+                              'w-[240px] pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground'
+                            )}
+                          >
+                            {field.value ? (
+                              formatDate(field.value) // ✅ native formatter
+                            ) : (
+                              <span>Pick a date</span>
+                            )}
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
@@ -118,7 +128,7 @@ const CreateRequestModal: React.FC<modalProps> = ({ listingId }) => {
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={isDateDisabled}
+                        fromDate={tomorrow}
                         initialFocus
                       />
                     </PopoverContent>
