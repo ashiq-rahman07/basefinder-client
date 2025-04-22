@@ -8,7 +8,7 @@ import { Trash } from 'lucide-react';
 import EmptyItems from '@/components/shared/EmptyItems';
 
 type TCategoriesProps = {
-  categories: ICategory[];
+  categories: ICategory[]  | [];
 };
 
 const ManageCategories = ({ categories }: TCategoriesProps) => {
@@ -62,7 +62,7 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold">Manage Categories</h1>
 
-        {categories.length === 0 && <EmptyItems title="Categories" />}
+        {categories?.length === 0 && <EmptyItems title="Categories" />}
 
         <CreateCategoryModal />
       </div>

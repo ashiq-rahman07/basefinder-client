@@ -5,20 +5,22 @@ import { FileText, Home, User } from 'lucide-react';
 
 const AdminHomePage = async () => {
   const usersData = await getAllUser();
-  const { meta } = usersData;
-  const { data } = await getAllListingByUser();
-  const requestData = await getAllRequest();
-  const { meta: requestMeta } = requestData?.data;
+  const userMeta = usersData?.meta || {};
+  const listingsData = await getAllListingByUser();
+const listingList = listingsData?.data || [];
+const requestData = await getAllRequest();
+const requestMeta = requestData?.data?.meta || {};
+  
 
   const stats = [
     {
       title: 'Total Users',
-      count: meta?.total,
+      count: userMeta?.total,
       icon: <User className="text-green-600" />,
     },
     {
       title: 'Listings',
-      count: data.meta?.total,
+      count: listingList.meta?.total,
       icon: <Home className="text-blue-600" />,
     },
     {
