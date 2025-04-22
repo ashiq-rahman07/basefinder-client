@@ -4,7 +4,7 @@ import { IListing } from '@/types/listing';
 
 import Image from 'next/image';
 
-import CreateRequestModal from './CreateRequestModal';
+// import CreateRequestModal from './CreateRequestModal';
 import { Button } from '@/components/ui/button';
 import { IRentalRequest } from '@/types';
 import { useUser } from '@/context/UserContext';
@@ -13,6 +13,7 @@ import { Bath, BedDouble } from 'lucide-react';
 import { createPayment } from '@/services/payment';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import RentalModal from './RequestModal';
 
 interface RentalRequestPageProps {
   listing: IListing;
@@ -182,7 +183,8 @@ const ListingDetails: React.FC<RentalRequestPageProps> = ({
         )}
         <div className="mt-4">
           {user && requestData == null && (
-            <CreateRequestModal listingId={listing?._id} />
+            // <CreateRequestModal listingId={listing?._id} />
+            <RentalModal listingId={listing?._id}/>
           )}
           {requestData?.status === 'Approved' &&
             requestData.paymentStatus === 'Pending' && (
