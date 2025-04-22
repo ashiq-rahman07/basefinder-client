@@ -137,7 +137,9 @@ export const changePassword = async (userData: FieldValues) => {
 export const getAllUser = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`
+      `${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`,{
+        cache: 'force-cache',
+      }
     );
     const data = await res.json();
 
