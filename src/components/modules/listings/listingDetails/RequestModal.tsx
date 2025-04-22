@@ -25,7 +25,7 @@ const RentalModal: React.FC<modalProps> = ({ listingId }) => {
         rentDuration: rentalDuration,
         message: message,
       };
-    console.log(requestFormData);
+   
      try {
           const res = await submitListing(requestFormData);
     

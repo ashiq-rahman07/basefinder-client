@@ -12,7 +12,7 @@ import { IRentalRequest } from '@/types';
 
 const ManageLandListingReq = ({ requests }: { requests: IRentalRequest[] }) => {
   // const router = useRouter();
-  console.log(requests);
+ 
 
   const handleView = (id: string) => {
     console.log('Viewing product:', id);

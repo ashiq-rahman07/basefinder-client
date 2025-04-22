@@ -18,9 +18,7 @@ export default function FilterSidebar() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [categories, setCategories] = useState([]);
-  // const [bedRooms, setBedrooms] = useState(0);
-  //   const [searchTerm, setSearchTerm] = useState('');
-  // console.log(searchTerm);
+  
 
   useEffect(() => {
     const fetchData = async () => {

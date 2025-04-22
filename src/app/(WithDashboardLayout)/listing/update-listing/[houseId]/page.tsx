@@ -11,7 +11,7 @@ const UpdateListingPage = async ({
   const { houseId } = await params;
 
   const { data: listing } = await getSingleListing(houseId);
-  //   console.log(product);
+
 
   return (
     <div className="flex justify-center items-center">

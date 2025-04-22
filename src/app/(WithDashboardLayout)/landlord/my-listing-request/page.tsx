@@ -5,7 +5,7 @@ import React from 'react';
 
 const MyListingRequestPage = async () => {
   const { data } = await getAllLandListingReq();
-  console.log(data);
+
   return (
     <div>
       {/* <ManageLandListingReq requests={data} /> */}

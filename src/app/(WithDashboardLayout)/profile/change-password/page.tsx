@@ -66,14 +66,14 @@ export default function ChangePasswordPage() {
   const passwordConfirm = form.watch('passwordConfirm');
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
-    // console.log(data)
+  
     const modifyPass = {
       oldPassword: data.currentPassword,
       newPassword: data.passwordConfirm,
     };
     try {
       const res = await changePassword(modifyPass);
-      console.log(res, 'result');
+     
       if (res?.success) {
         setSuccess(true);
         toast.success(res?.message);

@@ -95,7 +95,7 @@ export default function UpdateListingForm({ listing }: { listing: IListing }) {
       rentAmount: parseInt(data.rentAmount),
       bedrooms: parseInt(data.bedrooms),
     };
-    console.log(modifiedData);
+   
     const formData = new FormData();
     formData.append('data', JSON.stringify(modifiedData));
 

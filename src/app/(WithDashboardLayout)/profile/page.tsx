@@ -43,7 +43,7 @@ const ProfilePage = () => {
     loadUser();
   }, []);
 
-  console.log(userData);
+
   const {
     formState: { isSubmitting },
   } = form;
@@ -51,14 +51,14 @@ const ProfilePage = () => {
   const passwordConfirm = form.watch('passwordConfirm');
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
-    // console.log(data)
+  
     const modifyPass = {
       oldPassword: data.currentPassword,
       newPassword: data.passwordConfirm,
     };
     try {
       const res = await changePassword(modifyPass);
-      console.log(res, 'result');
+    
       if (res?.success) {
         toast.success(res?.message);
         await logout();

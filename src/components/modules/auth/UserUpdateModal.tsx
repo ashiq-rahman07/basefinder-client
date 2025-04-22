@@ -41,10 +41,10 @@ const UserUpdateModal = ({ data }: { data: IUser | undefined }) => {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
-    console.log(data);
+  
     try {
       const res = await updateProfile(data);
-      console.log(res, 'result');
+    
       if (res?.success) {
         toast.success(res?.message);
         router.push('/profile');

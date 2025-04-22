@@ -71,22 +71,6 @@ const RentalRequestForm: React.FC<RentalRequestFormProps> = ({
   //     message:data.message
   // }
 
-  // console.log(requestData)
-
-  //     try {
-  //       const res = await submitListing(requestData);
-
-  //       if (res.success) {
-  //         toast.success(res.message);
-  //         // router.push("/listing");
-  //       } else {
-  //         console.log(res)
-  //         toast.error(res.message);
-  //       }
-  //     } catch (err: any) {
-  //       console.error(err);
-  //     }
-  //   };
 
   return (
     <div className="border-2 border-gray-300 rounded-xl h-[600px] flex-grow max-w-2xl p-5 ">

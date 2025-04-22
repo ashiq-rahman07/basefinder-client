@@ -55,47 +55,7 @@ const ManageUsers = ({ users }: TUsersProps) => {
     }
   };
 
-  //  const columns: ColumnDef<IUser>[] = [
-  //     {
-  //       accessorKey: "name",
-  //       header: "Name",
-  //     },
-  //     {
-  //       accessorKey: "email",
-  //       header: "Email",
-  //     },
-  //     {
-  //       accessorKey: "role",
-  //       header: "Role",
-  //     },
-  //     {
-  //       accessorKey: "isActive",
-  //       header: "Status",
-  //       cell: ({ row }) => (row.getValue("isActive") ? "Active" : "Inactive"),
-  //     },
-  //     {
-  //       id: "actions",
-  //       cell: ({ row }) => (
-  //         <Button variant="ghost" onClick={() => console.log(row.original._id)}>
-  //           Edit
-  //         </Button>
-  //       ),
-  //     },
-  //     {
-  //         accessorKey: "action",
-  //         header: () => <div>Action</div>,
-  //         cell: ({ row }) => (
-  //           <button
-  //             className="text-red-500"
-  //             title="Delete"
-  //             onClick={() => handleDelete(row.original._id)}
-  //           >
-  //             <Trash className="w-5 h-5" />
-  //           </button>
-  //         ),
-  //       },
-  //   ]
-
+ 
   const columns: ColumnDef<IUser>[] = [
     {
       accessorKey: 'name',

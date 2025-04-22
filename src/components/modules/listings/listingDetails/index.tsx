@@ -35,10 +35,10 @@ const ListingDetails: React.FC<RentalRequestPageProps> = ({
       requestId: requestData?._id,
       rentAmount: listing?.rentAmount,
     };
-    console.log(paymentData);
+   
     try {
       const payment = await createPayment(paymentData);
-      console.log(payment);
+    
       if (payment?.success) {
         toast.success('Payment Processing');
         router.push(`${payment?.data}`);

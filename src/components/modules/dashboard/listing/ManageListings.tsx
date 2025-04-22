@@ -23,12 +23,10 @@ const ManageListings = ({
 }) => {
   const router = useRouter();
 
-  const handleView = (id: string) => {
-    console.log('Viewing product:', id);
-  };
+
 
   const handleDelete = async (productId: string) => {
-    console.log('Deleting product with ID:', productId);
+   
     try {
       const confirm = window.confirm(
         'Are you sure? This will delete  listings, and this listing  requests.'
@@ -113,7 +111,7 @@ const ManageListings = ({
             href={`/listings/${row.original._id}`}
             className="text-gray-500 hover:text-blue-500"
             title="View"
-            onClick={() => handleView(row.original._id)}
+           
           >
             <Eye className="w-5 h-5" />
           </Link>

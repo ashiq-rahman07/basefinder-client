@@ -34,10 +34,10 @@ export default function ProfilePage() {
   } = form;
 
   const onSubmit: SubmitHandler<FieldValues> = async data => {
-    console.log(data);
+
     try {
       const res = await updateProfile(data);
-      console.log(res, 'result');
+    
       if (res?.success) {
         toast.success(res?.message);
       } else {
