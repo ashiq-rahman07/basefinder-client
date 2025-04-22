@@ -4,6 +4,7 @@ import { getAllCategories } from '@/services/Category';
 import { ICategory } from '@/types';
 import Link from 'next/link';
 
+export const revalidate = 3600;
 const Category = async () => {
   const { data: categories } = await getAllCategories();
   return (

@@ -29,9 +29,12 @@ export const getAllListings = async (
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings?limit=${limit}&page=${page}&${params}`,
       {
+        cache: 'force-cache',
         next: {
+         
           tags: ['LISTING'],
         },
+      
       }
     );
     const data = await res.json();
@@ -63,6 +66,7 @@ export const getAllListingByUser = async (page?: string, limit?: string) => {
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
       {
         method: 'GET',
+        cache: 'force-cache',
         headers: {
           Authorization: (await cookies()).get('accessToken')!.value,
         },
@@ -127,6 +131,7 @@ export const updateListing = async (
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings/${houseId}`,
       {
         method: 'PATCH',
+        cache: 'force-cache',
         body: listingData,
         headers: {
           Authorization: (await cookies()).get('accessToken')!.value,

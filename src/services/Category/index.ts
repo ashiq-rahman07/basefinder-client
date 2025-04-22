@@ -22,6 +22,7 @@ export const createCategory = async (data: FormData) => {
 export const getAllCategories = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/category`, {
+      cache: 'force-cache',
       next: {
         tags: ['CATEGORY'],
       },
@@ -37,6 +38,7 @@ export const getAllCategoriesUser = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/category/created-user`,
       {
+        cache: 'force-cache',
         method: 'GET',
         headers: {
           Authorization: (await cookies()).get('accessToken')!.value,

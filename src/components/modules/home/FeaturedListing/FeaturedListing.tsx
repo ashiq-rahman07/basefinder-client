@@ -3,6 +3,8 @@ import { IListing } from '@/types/listing';
 // import Image from 'next/image'
 import { ListingCard } from './ListingCard';
 
+
+export const revalidate = 3600;
 const FeaturedListing = async () => {
   const { data } = await getAllListings();
   const listings = data?.result;
