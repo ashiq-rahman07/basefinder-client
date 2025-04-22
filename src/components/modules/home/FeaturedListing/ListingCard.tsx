@@ -2,6 +2,7 @@
 
 import { IListing } from "@/types/listing";
 import Image from "next/image";
+import Link from "next/link";
 
 export function ListingCard({ listing }: { listing: IListing }) {
   return (
@@ -14,7 +15,10 @@ export function ListingCard({ listing }: { listing: IListing }) {
              <div className="flex gap-4 mt-2 text-gray-500 text-sm">
                <span>🛏 3</span><span>🛁 2</span>
              </div>
+             <Link href={`/listings/${listing?._id}`}>
              <button className="mt-4 w-full bg-emerald-500 text-white py-2 rounded-lg hover:bg-emerald-600">View Details</button>
+             </Link>
+             
            </div>
   );
 }

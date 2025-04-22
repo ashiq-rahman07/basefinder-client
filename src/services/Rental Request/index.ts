@@ -1,5 +1,5 @@
 "use server";
-// import { IRentalRequest } from "@/types";
+
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 interface IRequestData {
@@ -113,6 +113,28 @@ export const getAllLandListingReq = async (page?: string) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-request/landlord?page=${page}`,
+      {
+          method: "GET",
+          headers: {
+            Authorization: (await cookies()).get("accessToken")!.value,
+          },
+          next: {
+              tags: ["RENTREQUEST"],
+            },
+      }
+        
+    );
+    const data = await res.json();
+ 
+    return data;
+  } catch (error: any) {
+    return Error(error.message);
+  }
+};
+export const getAllRequest = async () => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-request`,
       {
           method: "GET",
           headers: {

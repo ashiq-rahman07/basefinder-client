@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
-import Logo from "@/assets/svgs/Logo";
+import Logo from '@/assets/logonew.png'
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
 import { loginUser } from "@/services/AuthService";
@@ -23,6 +23,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 
 import { IUser } from "@/types";
+import Image from "next/image";
 
 export default function LoginForm() {
  const { setUser } = useUser();
@@ -75,7 +76,7 @@ export default function LoginForm() {
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
       <div className="flex items-center space-x-4 ">
-        <Logo />
+      <Image src={Logo} alt="house" width={100} height={100} className=""/>
         <div>
           <h1 className="text-xl font-semibold">Login</h1>
           <p className="font-extralight text-sm text-gray-600">Welcome back!</p>

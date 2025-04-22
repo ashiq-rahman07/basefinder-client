@@ -3,6 +3,7 @@
 // import { User } from "@/types";
 
 import ManageUsers from "@/components/modules/dashboard/admin/user";
+import { getAllUser } from "@/services/AuthService";
 // import { DataTable } from "@/components/modules/dashboard/admin/user/DataTable";
 // import { columns } from "@/components/modules/dashboard/admin/user/UserColumns";
 // import { IUser } from "@/types";
@@ -10,17 +11,18 @@ import ManageUsers from "@/components/modules/dashboard/admin/user";
 // type IUseresponse = {
 //     data:
 // }
-async function getUsers() {
-    // Fetch users from your API
+// async function getUsers() {
+//     // Fetch users from your API
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`);
-    const data =  await res.json();
-    return data.data.result;
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`);
+//     const data =  await res.json();
+//     return data.data.result;
  
-  }
+//   }
 export default async function UserManagement() {
-  const users = await getUsers();
-//   const userData = users.data.result
+  const usersData = await getAllUser();
+   const {result:users, meta} = usersData
+   console.log(meta);
   // console.log(users)
 // const users:Partial<IUser[]> = [
 //     {

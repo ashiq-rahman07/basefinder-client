@@ -59,10 +59,11 @@ export const getAllListings = async (
 //       return Error(error.message);
 //     }
 //   };
-export const getAllListingByUser = async (page?: string) => {
+export const getAllListingByUser = async (  page?: string,
+  limit?: string,) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?page=${page}`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
         {   
           method: "GET",
           headers: {

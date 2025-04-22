@@ -4,7 +4,7 @@ import { Home, Users, List, Settings } from "lucide-react";
 export function Sidebar() {
   return (
     <aside className="w-64 bg-gray-800 text-white p-6">
-      <h2 className="text-xl font-bold mb-6">BasaFinder</h2>
+      <h2 className="text-xl font-bold mb-6">HouseSolution</h2>
       <nav>
         <ul className="space-y-4">
           <li>

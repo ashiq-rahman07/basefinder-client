@@ -72,6 +72,7 @@ const ProductCard = ({ listing }: { listing: IListing }) => {
 
   
       
+      
         
           <Link href={`/listings/${listing?._id}`}>
           <Button

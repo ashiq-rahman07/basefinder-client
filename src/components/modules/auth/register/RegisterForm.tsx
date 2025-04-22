@@ -12,13 +12,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Link from "next/link";
-import Logo from "@/assets/svgs/Logo";
+import Logo from '@/assets/logonew.png'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registrationSchema } from "./registerValidation";
 import { registerUser } from "@/services/AuthService";
 import { toast } from "sonner";
 import { Select,SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function RegisterForm() {
   const form = useForm({
@@ -52,7 +53,7 @@ export default function RegisterForm() {
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
       <div className="flex items-center space-x-4 ">
-        <Logo />
+      <Image src={Logo} alt="house" width={100} height={100} className=""/>
         <div>
           <h1 className="text-xl font-semibold">Register</h1>
           <p className="font-extralight text-sm text-gray-600">

@@ -3,13 +3,18 @@ import ManageListings from "@/components/modules/dashboard/listing/ManageListing
 import {  getAllListingByUser } from "@/services/listing";
 
 
-const ListingPage = async() => {
+const ListingPage = async({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string }>;
+}) => {
  //   const { data, meta } = await getAllProducts();
- const { data} = await getAllListingByUser();
+ const { page } = await searchParams;
+ const { data} = await getAllListingByUser(page, "3");
 
  return (
    <div>
-     <ManageListings listings={data?.result} />
+     <ManageListings listings={data?.result} meta={data?.meta} />
    </div>
  );
 }

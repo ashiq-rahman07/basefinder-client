@@ -30,7 +30,7 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
           updateData.landlordPhone = phoneNumber;
         }
   
-    console.log(updateData);
+   
   
   const updateResult = await updateRequestData(requestId,updateData)
         const {  data:updatedData } = updateResult;
@@ -52,6 +52,7 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
       
     };
 
+
  const columns: ColumnDef<IRentalRequest>[] = [
  
   {
@@ -72,6 +73,7 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
   },
 
  
+  
   {
     id: 'actions',
     header: 'Action',

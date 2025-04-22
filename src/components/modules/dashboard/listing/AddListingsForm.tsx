@@ -21,7 +21,7 @@ import {  useEffect, useState } from "react";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
 // import { Plus } from "lucide-react";
-import Logo from "@/assets/svgs/Logo";
+import Logo from '@/assets/logonew.png'
 
 
 import {  ICategory } from "@/types";
@@ -32,6 +32,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { getAllCategories } from "@/services/Category";
 import { addListing } from "@/services/listing";
 import { Plus } from "lucide-react";
+import Image from "next/image";
 
 export default function AddListingsForm() {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -118,7 +119,7 @@ console.log(modifiedData);
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5 ">
       <div className="flex items-center space-x-4 mb-5 ">
-        <Logo />
+      <Image src={Logo} alt="house" width={100} height={100} className=""/>
 
         <h1 className="text-xl font-bold">Add Listing</h1>
       </div>

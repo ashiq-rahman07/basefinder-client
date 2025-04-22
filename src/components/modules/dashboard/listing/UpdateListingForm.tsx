@@ -22,8 +22,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import NMImageUploader from "@/components/ui/core/NMImageUploader";
 import ImagePreviewer from "@/components/ui/core/NMImageUploader/ImagePreviewer";
-// import { Plus } from "lucide-react";
-import Logo from "@/assets/svgs/Logo";
+
+import Logo from '@/assets/logonew.png'
 
 import {
   Select,
@@ -41,6 +41,7 @@ import { toast } from "sonner";
 import { IListing } from "@/types/listing";
 import { updateListing } from "@/services/listing";
 import { Plus } from "lucide-react";
+import Image from "next/image";
 
 export default function UpdateListingForm({ listing }: { listing: IListing }) {
   const [imageFiles, setImageFiles] = useState<File[] | []>([]);
@@ -100,7 +101,7 @@ export default function UpdateListingForm({ listing }: { listing: IListing }) {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 
 
-    // console.log({ availableColors, keyFeatures, specification });
+ 
 
     const modifiedData = {
       ...data,
@@ -133,7 +134,7 @@ console.log(modifiedData)
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5 ">
       <div className="flex items-center space-x-4 mb-5 ">
-        <Logo />
+        <Image src={Logo} alt="house" width={100} height={100} className=""/>
 
         <h1 className="text-xl font-bold">Update Listing Info</h1>
       </div>

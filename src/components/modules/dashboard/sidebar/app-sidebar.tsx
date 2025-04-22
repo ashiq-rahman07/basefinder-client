@@ -1,16 +1,7 @@
 "use client";
 
 import * as React from "react";
-// import {
-//   Bot,
-//   Frame,
-//   LifeBuoy,
-//   Map,
-//   PieChart,
-//   Send,
-//   Settings,
-//   SquareTerminal,
-// } from "lucide-react";
+
 
 import {
   Sidebar,
@@ -21,14 +12,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-// import { NavMain } from "./nav-main";
-import {  Home, Users, List, Settings, MessageSquare, LucideIcon } from "lucide-react";
+
+import {  Home, Users, Settings, PlusCircle, LucideIcon ,FileText,Tags,LayoutDashboard ,ClipboardList} from "lucide-react";
 import { NavUser } from "./nav-user";
 import Link from "next/link";
-import Logo from "@/assets/svgs/Logo";
-import { NavMain2 } from "./sitebar-menuitem";
+import Logo from '@/assets/logonew.png'
+import { NavMain2 } from "./sidebar-menuitem";
 import { useUser } from "@/context/UserContext";
-// import { toast } from "sonner";
+import Image from "next/image";
+
+
 
 interface INavItem {
   title: string;
@@ -36,7 +29,8 @@ interface INavItem {
   icon: LucideIcon;
   isActive?: boolean;
   items?:{
-    title: string
+    title: string;
+    icon: LucideIcon ;
     url: string
   }[],
   roles?: ("admin" | "landlord" | "tenant")[]; // Roles allowed to see this item
@@ -49,7 +43,7 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
     {
       title: "Dashboard",
       url: `/${user?.role}/dashboard`,
-      icon: Home,
+      icon: LayoutDashboard,
       isActive: true,
       roles: ["admin", "landlord", "tenant"], // All roles can see this
     },
@@ -62,17 +56,18 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
     {
       title: "Category Management",
       url: '/category',
-      icon: Users,
+      icon: Tags,
       roles: ["admin","landlord"], // Only admin can see this
     },
     {
       title: "Listings Management",
       url: '/listing',
-      icon: List,
+      icon: Home,
       roles: ["landlord","admin"], // Admin and landlord can see this
       items: [
         {
           title: "Add Listing",
+          icon: PlusCircle,
           url: "/listing/add-listing",
         },
        
@@ -81,14 +76,14 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
     {
       title: "Request Management",
       url: '/landlord/my-listing-request',
-      icon: List,
+      icon: ClipboardList,
       roles: ["landlord"], 
      
     },
     {
       title: "My Request",
       url: "/tenant/my-request",
-      icon: MessageSquare,
+      icon: FileText,
       roles: ["tenant"], // Only tenant can see this
       
     },
@@ -100,6 +95,7 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
       items: [
         {
           title: "Profile",
+          icon: FileText,
           url: "/profile",
         },
       ],
@@ -115,12 +111,11 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <div className="flex items-center justify-center">
-                  <Logo />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <h2 className="font-bold text-xl">NextMart</h2>
-                </div>
+               
+                    <Image src={Logo} alt="house" width={100} height={100} className=""/>
+            
+       
+               
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

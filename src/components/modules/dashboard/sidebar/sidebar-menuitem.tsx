@@ -31,6 +31,7 @@ export const NavMain2 = (
     roles?: ("admin" | "landlord" | "tenant"|"undefine")[];
     items?: {
       title: string;
+      icon: LucideIcon;
       url: string;
     }[];
   }[];
@@ -54,7 +55,7 @@ const userRole= user?.role
             <SidebarMenuButton asChild tooltip={item.title}>
               <Link href={item.url}>
                 <item.icon />
-                <span>{item.title}</span>
+                <span className="hover:text-green-600">{item.title}</span>
               </Link>
             </SidebarMenuButton>
             {item.items?.length ? (
@@ -71,7 +72,8 @@ const userRole= user?.role
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <Link href={subItem.url}>
-                              <span>{subItem.title}</span>
+                            <subItem.icon />
+                              <span className="hover:text-green-600">{subItem.title}</span>
                             </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>

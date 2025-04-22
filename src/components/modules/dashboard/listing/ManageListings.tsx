@@ -9,8 +9,11 @@ import { Button } from "@/components/ui/button";
 import { IListing } from "@/types/listing";
 import EmptyItems from "@/components/shared/EmptyItems";
 import { deleteListing } from "@/services/listing";
+import { IMeta } from "@/types";
+import TablePagination from "@/components/ui/core/NMTable/TablePagination";
+import Link from "next/link";
 
-const ManageListings = ({ listings }: { listings: IListing[] }) => {
+const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta }) => {
   const router = useRouter();
 
   const handleView = (id:string) => {
@@ -92,13 +95,14 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
       header: "Action",
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
-          <button
+          <Link
+            href={`/listings/${row.original._id}`}
             className="text-gray-500 hover:text-blue-500"
             title="View"
             onClick={() => handleView(row.original._id)}
           >
             <Eye className="w-5 h-5" />
-          </button>
+          </Link>
 
           <button
             className="text-gray-500 hover:text-green-500"
@@ -147,6 +151,7 @@ const ManageListings = ({ listings }: { listings: IListing[] }) => {
         </div>
       </div>
       <NMTable columns={columns} data={listings || []} />
+      <TablePagination totalPage={meta?.totalPage} />
     </div>
   );
 };
