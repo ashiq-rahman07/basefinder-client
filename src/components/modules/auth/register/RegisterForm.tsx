@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -8,18 +8,24 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import Logo from '@/assets/logonew.png'
-import { zodResolver } from "@hookform/resolvers/zod";
-import { registrationSchema } from "./registerValidation";
-import { registerUser } from "@/services/AuthService";
-import { toast } from "sonner";
-import { Select,SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import Logo from '@/assets/logonew.png';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { registrationSchema } from './registerValidation';
+import { registerUser } from '@/services/AuthService';
+import { toast } from 'sonner';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 export default function RegisterForm() {
   const form = useForm({
@@ -30,18 +36,18 @@ export default function RegisterForm() {
     formState: { isSubmitting },
   } = form;
 
-  const password = form.watch("password");
-  const passwordConfirm = form.watch("passwordConfirm");
+  const password = form.watch('password');
+  const passwordConfirm = form.watch('passwordConfirm');
   //   console.log(password, passwordConfirm);
-   const router = useRouter();
+  const router = useRouter();
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
     // console.log(data)
     try {
       const res = await registerUser(data);
       if (res?.success) {
         toast.success(res?.message);
-        router.push('/login')
+        router.push('/login');
       } else {
         toast.error(res?.message);
       }
@@ -53,7 +59,7 @@ export default function RegisterForm() {
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
       <div className="flex items-center space-x-4 ">
-      <Image src={Logo} alt="house" width={100} height={100} className=""/>
+        <Image src={Logo} alt="house" width={100} height={100} className="" />
         <div>
           <h1 className="text-xl font-semibold">Register</h1>
           <p className="font-extralight text-sm text-gray-600">
@@ -70,7 +76,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} value={field.value || ""} />
+                  <Input {...field} value={field.value || ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -83,43 +89,37 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" {...field} value={field.value || ""} />
+                  <Input type="email" {...field} value={field.value || ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Role</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select User Role" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                     
-                        <SelectItem  value="landlord">
-                          Landlord
-                        </SelectItem>
-                        <SelectItem  value="tenant">
-                          Tenant
-                        </SelectItem>
-                  
-                    </SelectContent>
-                  </Select>
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Role</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select User Role" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="landlord">Landlord</SelectItem>
+                    <SelectItem value="tenant">Tenant</SelectItem>
+                  </SelectContent>
+                </Select>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <FormField
             control={form.control}
             name="password"
@@ -127,7 +127,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} value={field.value || ""} />
+                  <Input type="password" {...field} value={field.value || ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -140,7 +140,7 @@ export default function RegisterForm() {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} value={field.value || ""} />
+                  <Input type="password" {...field} value={field.value || ''} />
                 </FormControl>
 
                 {passwordConfirm && password !== passwordConfirm ? (
@@ -157,7 +157,7 @@ export default function RegisterForm() {
             type="submit"
             className="mt-5 w-full"
           >
-            {isSubmitting ? "Registering...." : "Register"}
+            {isSubmitting ? 'Registering....' : 'Register'}
           </Button>
         </form>
       </Form>

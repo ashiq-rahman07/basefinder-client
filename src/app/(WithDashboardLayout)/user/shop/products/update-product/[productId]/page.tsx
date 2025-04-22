@@ -1,6 +1,6 @@
-import UpdateListingForm from "@/components/modules/listing/UpdateListingForm";
+import UpdateListingForm from '@/components/modules/listing/UpdateListingForm';
 // import UpdateProductForm from "@/components/modules/shop/product/UpdateProductForm";
-import { getSingleListing } from "@/services/listing";
+import { getSingleListing } from '@/services/listing';
 // import { getSingleProduct } from "@/services/Product";
 
 const UpdateProductPage = async ({
@@ -10,7 +10,7 @@ const UpdateProductPage = async ({
 }) => {
   const { houseId } = await params;
 
-  const { data:listing } = await getSingleListing(houseId);
+  const { data: listing } = await getSingleListing(houseId);
   //   console.log(listing);
 
   return (

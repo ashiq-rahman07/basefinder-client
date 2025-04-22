@@ -1,9 +1,9 @@
-import ManageProducts from "@/components/modules/shop/product";
-import { getAllProducts } from "@/services/Product";
+import ManageProducts from '@/components/modules/shop/product';
+import { getAllProducts } from '@/services/Product';
 
 const ManageProductsPage = async () => {
-//   const { data, meta } = await getAllProducts();
-  const { data} = await getAllProducts();
+  //   const { data, meta } = await getAllProducts();
+  const { data } = await getAllProducts();
   return (
     <div>
       <ManageProducts products={data} />

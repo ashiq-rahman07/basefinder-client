@@ -1,9 +1,5 @@
-
-
 const RentPayPage = () => {
-  return (
-    <div>Pay Rent</div>
-  )
-}
+  return <div>Pay Rent</div>;
+};
 
-export default RentPayPage
+export default RentPayPage;

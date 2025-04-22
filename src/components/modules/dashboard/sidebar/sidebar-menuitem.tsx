@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
 // import { LucideIcon, Home, Users, List, Settings, Bookmark, MessageSquare, ChevronRight } from "lucide-react";
-import { LucideIcon, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { LucideIcon, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -13,14 +13,15 @@ import {
   SidebarMenuSub,
   SidebarMenuSubItem,
   SidebarMenuSubButton,
-} from "@/components/ui/sidebar";
-import { useUser } from "@/context/UserContext";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@radix-ui/react-collapsible";
+} from '@/components/ui/sidebar';
+import { useUser } from '@/context/UserContext';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@radix-ui/react-collapsible';
 
-
-
-export const NavMain2 = (
-    {
+export const NavMain2 = ({
   items,
 }: {
   items: {
@@ -28,37 +29,36 @@ export const NavMain2 = (
     url: string;
     icon: LucideIcon;
     isActive?: boolean;
-    roles?: ("admin" | "landlord" | "tenant"|"undefine")[];
+    roles?: ('admin' | 'landlord' | 'tenant' | 'undefine')[];
     items?: {
       title: string;
       icon: LucideIcon;
       url: string;
     }[];
   }[];
-}
-) => {
+}) => {
   const { user } = useUser();
-const userRole= user?.role
+  const userRole = user?.role;
 
-
-  
   // Filter menu items based on the user's role
-  const filteredNavItems = items.filter((item) => item.roles?.includes(userRole || 'admin' || 'landlord'));
+  const filteredNavItems = items.filter(item =>
+    item.roles?.includes(userRole || 'admin' || 'landlord')
+  );
 
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Menu</SidebarGroupLabel>
       <SidebarMenu>
-        {filteredNavItems.map((item) => (
-             <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
-          <SidebarMenuItem key={item.title}>
-            <SidebarMenuButton asChild tooltip={item.title}>
-              <Link href={item.url}>
-                <item.icon />
-                <span className="hover:text-green-600">{item.title}</span>
-              </Link>
-            </SidebarMenuButton>
-            {item.items?.length ? (
+        {filteredNavItems.map(item => (
+          <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
+            <SidebarMenuItem key={item.title}>
+              <SidebarMenuButton asChild tooltip={item.title}>
+                <Link href={item.url}>
+                  <item.icon />
+                  <span className="hover:text-green-600">{item.title}</span>
+                </Link>
+              </SidebarMenuButton>
+              {item.items?.length ? (
                 <>
                   <CollapsibleTrigger asChild>
                     <SidebarMenuAction className="data-[state=open]:rotate-90">
@@ -68,12 +68,14 @@ const userRole= user?.role
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <SidebarMenuSub>
-                      {item.items?.map((subItem) => (
+                      {item.items?.map(subItem => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
                             <Link href={subItem.url}>
-                            <subItem.icon />
-                              <span className="hover:text-green-600">{subItem.title}</span>
+                              <subItem.icon />
+                              <span className="hover:text-green-600">
+                                {subItem.title}
+                              </span>
                             </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
@@ -82,7 +84,7 @@ const userRole= user?.role
                   </CollapsibleContent>
                 </>
               ) : null}
-          </SidebarMenuItem>
+            </SidebarMenuItem>
           </Collapsible>
         ))}
       </SidebarMenu>

@@ -1,13 +1,11 @@
-import AboutPageSection from "@/components/modules/about/AboutPage"
-
-
+import AboutPageSection from '@/components/modules/about/AboutPage';
 
 const AboutPage = () => {
   return (
     <>
-      <AboutPageSection/>
+      <AboutPageSection />
     </>
-  )
-}
+  );
+};
 
-export default AboutPage
+export default AboutPage;

@@ -1,7 +1,6 @@
-import ProductCard from "@/components/ui/core/ProductCard";
-import FilterSidebar from "./filterSidebar";
-import { IListing } from "@/types/listing";
-
+import ProductCard from '@/components/ui/core/ProductCard';
+import FilterSidebar from './filterSidebar';
+import { IListing } from '@/types/listing';
 
 const AllListings = ({ listings }: { listings: IListing[] }) => {
   return (

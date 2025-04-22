@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider"; // For price range
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Slider } from '@/components/ui/slider'; // For price range
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"; // For dropdowns
+} from '@/components/ui/select'; // For dropdowns
 
 export default function HeroSection() {
   return (
@@ -16,16 +16,21 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: "url('https://cdn.britannica.com/05/157305-004-53D5D212.jpg')", // Replace with your image path
-          filter: "blur(1px)", // Apply blur
-          opacity: "0.6", // Apply low opacity
+          backgroundImage:
+            "url('https://cdn.britannica.com/05/157305-004-53D5D212.jpg')", // Replace with your image path
+          filter: 'blur(1px)', // Apply blur
+          opacity: '0.6', // Apply low opacity
         }}
       ></div>
- <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-black/50"></div>
       {/* Hero Content */}
       <div className="relative z-10 text-center">
-        <h1 className="text-4xl text-gray-800 font-bold mb-4">Find Your Perfect Rental Home</h1>
-        <p className="text-lg mb-8">Smart housing solutions for landlords and tenants.</p>
+        <h1 className="text-4xl text-gray-800 font-bold mb-4">
+          Find Your Perfect Rental Home
+        </h1>
+        <p className="text-lg mb-8">
+          Smart housing solutions for landlords and tenants.
+        </p>
 
         {/* Search Form */}
         <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
@@ -37,7 +42,9 @@ export default function HeroSection() {
 
             {/* Price Range Slider */}
             <div>
-              <label className="block text-sm font-medium mb-2">Price Range</label>
+              <label className="block text-sm font-medium mb-2">
+                Price Range
+              </label>
               <Slider defaultValue={[500, 2000]} max={5000} step={100} />
               <div className="flex justify-between text-sm text-gray-600 mt-2">
                 <span>$500</span>

@@ -1,37 +1,44 @@
-"use client";
+'use client';
 
-import { NMTable } from "@/components/ui/core/NMTable/index";
-import { ColumnDef } from "@tanstack/react-table";
-import { Edit, Eye, Plus, Trash } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { IListing } from "@/types/listing";
-import EmptyItems from "@/components/shared/EmptyItems";
-import { deleteListing } from "@/services/listing";
-import { IMeta } from "@/types";
-import TablePagination from "@/components/ui/core/NMTable/TablePagination";
-import Link from "next/link";
-import { toast } from "sonner";
+import { NMTable } from '@/components/ui/core/NMTable/index';
+import { ColumnDef } from '@tanstack/react-table';
+import { Edit, Eye, Plus, Trash } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { IListing } from '@/types/listing';
+import EmptyItems from '@/components/shared/EmptyItems';
+import { deleteListing } from '@/services/listing';
+import { IMeta } from '@/types';
+import TablePagination from '@/components/ui/core/NMTable/TablePagination';
+import Link from 'next/link';
+import { toast } from 'sonner';
 
-const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta }) => {
+const ManageListings = ({
+  listings,
+  meta,
+}: {
+  listings: IListing[];
+  meta: IMeta;
+}) => {
   const router = useRouter();
 
-  const handleView = (id:string) => {
-    console.log("Viewing product:", id);
+  const handleView = (id: string) => {
+    console.log('Viewing product:', id);
   };
 
-  const handleDelete = async(productId: string) => {
-    console.log("Deleting product with ID:", productId);
+  const handleDelete = async (productId: string) => {
+    console.log('Deleting product with ID:', productId);
     try {
-      const confirm = window.confirm("Are you sure? This will delete  listings, and this listing  requests.");
+      const confirm = window.confirm(
+        'Are you sure? This will delete  listings, and this listing  requests.'
+      );
       if (!confirm) return;
-      const res = await deleteListing(productId)
-      if(res.success){
-        toast.success('Listing Deleted Succesfully')
+      const res = await deleteListing(productId);
+      if (res.success) {
+        toast.success('Listing Deleted Succesfully');
         // router.refresh()
       }
- 
     } catch (error) {
       console.log(error);
     }
@@ -39,8 +46,8 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
 
   const columns: ColumnDef<IListing>[] = [
     {
-      accessorKey: "name",
-      header: "Name",
+      accessorKey: 'name',
+      header: 'Name',
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Image
@@ -55,37 +62,37 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
       ),
     },
     {
-      accessorKey: "location",
-      header: "Location",
+      accessorKey: 'location',
+      header: 'Location',
       cell: ({ row }) => <span>{row.original.location}</span>,
     },
     {
-      accessorKey: "category",
-      header: "Category",
+      accessorKey: 'category',
+      header: 'Category',
       cell: ({ row }) => <span>{row.original.category.name}</span>,
     },
     {
-      accessorKey: "landlordUser",
-      header: "Landlord User",
+      accessorKey: 'landlordUser',
+      header: 'Landlord User',
       cell: ({ row }) => <span>{row.original.landlordUser?.name}</span>,
     },
     {
-      accessorKey: "rentAmount",
-      header: "Rent Amount",
+      accessorKey: 'rentAmount',
+      header: 'Rent Amount',
       cell: ({ row }) => <span>{row.original.rentAmount}</span>,
     },
     {
-      accessorKey: "bedrooms",
-      header: "Total Bedrooms",
+      accessorKey: 'bedrooms',
+      header: 'Total Bedrooms',
       cell: ({ row }) => <span>{row.original.bedrooms}</span>,
     },
-  
+
     {
-      accessorKey: "isAvailable",
+      accessorKey: 'isAvailable',
       header: () => <div>Available</div>,
       cell: ({ row }) => (
         <div>
-          {row.original.isAvailable? (
+          {row.original.isAvailable ? (
             <p className="text-green-500 border bg-green-100 w-14 text-center px-1 rounded">
               True
             </p>
@@ -98,8 +105,8 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
       ),
     },
     {
-      accessorKey: "action",
-      header: "Action",
+      accessorKey: 'action',
+      header: 'Action',
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Link
@@ -115,9 +122,7 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
             className="text-gray-500 hover:text-green-500"
             title="Edit"
             onClick={() =>
-              router.push(
-                `/listing/update-listing/${row.original._id}`
-              )
+              router.push(`/listing/update-listing/${row.original._id}`)
             }
           >
             <Edit className="w-5 h-5" />
@@ -138,21 +143,12 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
   return (
     <div>
       <div className="flex items-center justify-between">
-   
         <h1 className="text-xl font-bold">Manage Listing</h1>
-    
-         
-       { 
-        listings?.length === 0 && <EmptyItems title="Listings"/>
-       }
-    
-   
-        
+
+        {listings?.length === 0 && <EmptyItems title="Listings" />}
+
         <div className="flex items-center gap-2 pb-2">
-          <Button
-            onClick={() => router.push("/listing/add-listing")}
-            size="sm"
-          >
+          <Button onClick={() => router.push('/listing/add-listing')} size="sm">
             Add Listing <Plus />
           </Button>
         </div>

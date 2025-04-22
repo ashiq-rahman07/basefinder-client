@@ -1,8 +1,5 @@
-
-
-
-import UpdateListingForm from "@/components/modules/dashboard/listing/UpdateListingForm";
-import { getSingleListing } from "@/services/listing";
+import UpdateListingForm from '@/components/modules/dashboard/listing/UpdateListingForm';
+import { getSingleListing } from '@/services/listing';
 // import UpdateProductForm from "@/components/modules/shop/product/UpdateProductForm";
 // import { getSingleProduct } from "@/services/Product";
 
@@ -13,7 +10,7 @@ const UpdateListingPage = async ({
 }) => {
   const { houseId } = await params;
 
-  const { data:listing } = await getSingleListing(houseId);
+  const { data: listing } = await getSingleListing(houseId);
   //   console.log(product);
 
   return (

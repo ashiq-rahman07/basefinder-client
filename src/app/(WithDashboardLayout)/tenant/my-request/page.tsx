@@ -1,22 +1,16 @@
-import ManageTenantRequest from "@/components/modules/dashboard/rentRequest/ManageTenantRequest";
+import ManageTenantRequest from '@/components/modules/dashboard/rentRequest/ManageTenantRequest';
 
-import { getAllReqTenant } from "@/services/Rental Request";
+import { getAllReqTenant } from '@/services/Rental Request';
 
-
-
-const MyRequestPage = async() => {
+const MyRequestPage = async () => {
   //   const { data, meta } = await getAllProducts();
-  const { data} = await getAllReqTenant();
- 
-  
-
+  const { data } = await getAllReqTenant();
 
   return (
     <div>
       <ManageTenantRequest requests={data?.result} />
     </div>
   );
- }
- 
- export default MyRequestPage;
- 
+};
+
+export default MyRequestPage;

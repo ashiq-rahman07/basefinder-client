@@ -1,22 +1,20 @@
+import ManageListings from '@/components/modules/dashboard/listing/ManageListings';
+import { getAllListingByUser } from '@/services/listing';
 
-import ManageListings from "@/components/modules/dashboard/listing/ManageListings";
-import {  getAllListingByUser } from "@/services/listing";
-
-
-const ListingPage = async({
+const ListingPage = async ({
   searchParams,
 }: {
   searchParams: Promise<{ page: string }>;
 }) => {
- //   const { data, meta } = await getAllProducts();
- const { page } = await searchParams;
- const { data} = await getAllListingByUser(page, "3");
+  //   const { data, meta } = await getAllProducts();
+  const { page } = await searchParams;
+  const { data } = await getAllListingByUser(page, '3');
 
- return (
-   <div>
-     <ManageListings listings={data?.result} meta={data?.meta} />
-   </div>
- );
-}
+  return (
+    <div>
+      <ManageListings listings={data?.result} meta={data?.meta} />
+    </div>
+  );
+};
 
-export default  ListingPage;
+export default ListingPage;

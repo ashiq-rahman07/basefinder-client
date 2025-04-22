@@ -1,4 +1,3 @@
-
 import { Facebook, Instagram, Linkedin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,31 +9,75 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div className="flex items-center space-x-2 mb-4">
-            <Image src="/logo.svg" alt="BasaFinder Logo" width={40} height={40} />
-            <h2 className="text-xl font-semibold text-white">House Solutions</h2>
+            <Image
+              src="/logo.svg"
+              alt="BasaFinder Logo"
+              width={40}
+              height={40}
+            />
+            <h2 className="text-xl font-semibold text-white">
+              House Solutions
+            </h2>
           </div>
-          <p>Your smart rental housing solution for easy property search and tenant connection.</p>
+          <p>
+            Your smart rental housing solution for easy property search and
+            tenant connection.
+          </p>
         </div>
 
         {/* Quick Links */}
         <div>
           <h3 className="text-white text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/" className="hover:text-green-400">Home</Link></li>
-            <li><Link href="/listings" className="hover:text-green-400">Listings</Link></li>
-            <li><Link href="/about" className="hover:text-green-400">About Us</Link></li>
-            <li><Link href="/contact" className="hover:text-green-400">Contact</Link></li>
+            <li>
+              <Link href="/" className="hover:text-green-400">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link href="/listings" className="hover:text-green-400">
+                Listings
+              </Link>
+            </li>
+            <li>
+              <Link href="/about" className="hover:text-green-400">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-green-400">
+                Contact
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* Explore Types */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-3">Property Types</h3>
+          <h3 className="text-white text-lg font-semibold mb-3">
+            Property Types
+          </h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="#" className="hover:text-green-400">Condos</a></li>
-            <li><a href="#" className="hover:text-green-400">Apartments</a></li>
-            <li><a href="#" className="hover:text-green-400">Duplex</a></li>
-            <li><a href="#" className="hover:text-green-400">Furnished</a></li>
+            <li>
+              <a href="#" className="hover:text-green-400">
+                Condos
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-green-400">
+                Apartments
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-green-400">
+                Duplex
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-green-400">
+                Furnished
+              </a>
+            </li>
           </ul>
         </div>
 
@@ -44,9 +87,16 @@ export default function Footer() {
           <p className="text-sm">Email: support@housesolution.com</p>
           <p className="text-sm mt-1">Phone: +880-1727504474</p>
           <div className="flex mt-4 space-x-4">
-            <Link href="#"><Facebook /></Link>
-            <Link href="#"> <Linkedin/></Link>
-            <Link href="#"><Instagram /></Link>
+            <Link href="#">
+              <Facebook />
+            </Link>
+            <Link href="#">
+              {' '}
+              <Linkedin />
+            </Link>
+            <Link href="#">
+              <Instagram />
+            </Link>
           </div>
         </div>
       </div>

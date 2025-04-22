@@ -1,7 +1,6 @@
-"use client";
+'use client';
 
-import * as React from "react";
-
+import * as React from 'react';
 
 import {
   Sidebar,
@@ -11,98 +10,103 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 
-import {  Home, Users, Settings, PlusCircle, LucideIcon ,FileText,Tags,LayoutDashboard ,ClipboardList} from "lucide-react";
-import { NavUser } from "./nav-user";
-import Link from "next/link";
-import Logo from '@/assets/logonew.png'
-import { NavMain2 } from "./sidebar-menuitem";
-import { useUser } from "@/context/UserContext";
-import Image from "next/image";
-
-
+import {
+  Home,
+  Users,
+  Settings,
+  PlusCircle,
+  LucideIcon,
+  FileText,
+  Tags,
+  LayoutDashboard,
+  ClipboardList,
+} from 'lucide-react';
+import { NavUser } from './nav-user';
+import Link from 'next/link';
+import Logo from '@/assets/logonew.png';
+import { NavMain2 } from './sidebar-menuitem';
+import { useUser } from '@/context/UserContext';
+import Image from 'next/image';
 
 interface INavItem {
   title: string;
   url: string;
   icon: LucideIcon;
   isActive?: boolean;
-  items?:{
+  items?: {
     title: string;
-    icon: LucideIcon ;
-    url: string
-  }[],
-  roles?: ("admin" | "landlord" | "tenant")[]; // Roles allowed to see this item
+    icon: LucideIcon;
+    url: string;
+  }[];
+  roles?: ('admin' | 'landlord' | 'tenant')[]; // Roles allowed to see this item
 }
 
-export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
-   const { user } = useUser();
-  
+export const AppSidebar = ({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) => {
+  const { user } = useUser();
+
   const navItems: INavItem[] = [
     {
-      title: "Dashboard",
+      title: 'Dashboard',
       url: `/${user?.role}/dashboard`,
       icon: LayoutDashboard,
       isActive: true,
-      roles: ["admin", "landlord", "tenant"], // All roles can see this
+      roles: ['admin', 'landlord', 'tenant'], // All roles can see this
     },
     {
-      title: "User Management",
-      url: "/admin/users",
+      title: 'User Management',
+      url: '/admin/users',
       icon: Users,
-      roles: ["admin"], // Only admin can see this
+      roles: ['admin'], // Only admin can see this
     },
     {
-      title: "Category Management",
+      title: 'Category Management',
       url: '/category',
       icon: Tags,
-      roles: ["admin","landlord"], // Only admin can see this
+      roles: ['admin', 'landlord'], // Only admin can see this
     },
     {
-      title: "Listings Management",
+      title: 'Listings Management',
       url: '/listing',
       icon: Home,
-      roles: ["landlord","admin"], // Admin and landlord can see this
+      roles: ['landlord', 'admin'], // Admin and landlord can see this
       items: [
         {
-          title: "Add Listing",
+          title: 'Add Listing',
           icon: PlusCircle,
-          url: "/listing/add-listing",
+          url: '/listing/add-listing',
         },
-       
       ],
     },
     {
-      title: "Request Management",
+      title: 'Request Management',
       url: '/landlord/my-listing-request',
       icon: ClipboardList,
-      roles: ["landlord"], 
-     
+      roles: ['landlord'],
     },
     {
-      title: "My Request",
-      url: "/tenant/my-request",
+      title: 'My Request',
+      url: '/tenant/my-request',
       icon: FileText,
-      roles: ["tenant"], // Only tenant can see this
-      
+      roles: ['tenant'], // Only tenant can see this
     },
     {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: Settings,
-      roles: ["admin", "landlord", "tenant"],
+      roles: ['admin', 'landlord', 'tenant'],
       items: [
         {
-          title: "Profile",
+          title: 'Profile',
           icon: FileText,
-          url: "/profile",
+          url: '/profile',
         },
       ],
-     
     },
-   
-  ]
+  ];
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -111,11 +115,13 @@ export const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) =
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-               
-                    <Image src={Logo} alt="house" width={100} height={100} className=""/>
-            
-       
-               
+                <Image
+                  src={Logo}
+                  alt="house"
+                  width={100}
+                  height={100}
+                  className=""
+                />
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

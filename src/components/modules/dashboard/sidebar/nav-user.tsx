@@ -1,44 +1,44 @@
-"use client";
+'use client';
 
-import { ChevronsUpDown, LogOut } from "lucide-react";
+import { ChevronsUpDown, LogOut } from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import { useUser } from "@/context/UserContext";
-import { usePathname, useRouter } from "next/navigation";
-import { logout } from "@/services/AuthService";
-import { protectedRoutes } from "@/contants";
+} from '@/components/ui/sidebar';
+import { useUser } from '@/context/UserContext';
+import { usePathname, useRouter } from 'next/navigation';
+import { logout } from '@/services/AuthService';
+import { protectedRoutes } from '@/contants';
 
 export function NavUser() {
   const { isMobile } = useSidebar();
-  const { user,isLoading, setIsLoading } = useUser();
+  const { user, isLoading, setIsLoading } = useUser();
 
   const router = useRouter();
   const pathname = usePathname();
-  if(isLoading){
-    return <div>loading.....</div>
+  if (isLoading) {
+    return <div>loading.....</div>;
   }
   const handleLogout = () => {
     logout();
-    
+
     setIsLoading(true);
- 
-    if (protectedRoutes.some((route) => pathname.match(route))) {
-      router.push("/");
+
+    if (protectedRoutes.some(route => pathname.match(route))) {
+      router.push('/');
     }
-    router.push('/')
+    router.push('/');
   };
 
   return (
@@ -65,7 +65,7 @@ export function NavUser() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile ? 'bottom' : 'right'}
             align="end"
             sideOffset={4}
           >

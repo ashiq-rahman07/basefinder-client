@@ -1,6 +1,5 @@
-import { ICategory } from "@/types";
-import Image from "next/image";
-
+import { ICategory } from '@/types';
+import Image from 'next/image';
 
 const CategoryCard = ({ category }: { category: ICategory }) => {
   return (

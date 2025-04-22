@@ -1,13 +1,13 @@
-"use server";
-import { revalidateTag } from "next/cache";
-import { cookies } from "next/headers";
+'use server';
+import { revalidateTag } from 'next/cache';
+import { cookies } from 'next/headers';
 
 //  get all brands
 export const getAllBrands = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand`, {
       next: {
-        tags: ["Brands"],
+        tags: ['Brands'],
       },
     });
     const data = await res.json();
@@ -21,13 +21,13 @@ export const getAllBrands = async () => {
 export const createBrand = async (brandData: FormData): Promise<any> => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/brand`, {
-      method: "POST",
+      method: 'POST',
       body: brandData,
       headers: {
-        Authorization: (await cookies()).get("accessToken")!.value,
+        Authorization: (await cookies()).get('accessToken')!.value,
       },
     });
-    revalidateTag("Brands");
+    revalidateTag('Brands');
     return res.json();
   } catch (error: any) {
     return Error(error);
@@ -40,13 +40,13 @@ export const deleteBrand = async (brandId: string): Promise<any> => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/brand/${brandId}`,
       {
-        method: "DELETE",
+        method: 'DELETE',
         headers: {
-          Authorization: (await cookies()).get("accessToken")!.value,
+          Authorization: (await cookies()).get('accessToken')!.value,
         },
       }
     );
-    revalidateTag("Brands");
+    revalidateTag('Brands');
     return res.json();
   } catch (error: any) {
     return Error(error);

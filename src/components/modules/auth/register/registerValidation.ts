@@ -1,29 +1,28 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const registrationSchema = z.object({
   name: z
-    .string({ required_error: "Name is required" })
-    .min(2, "Name must be between 2 and 50 characters")
-    .max(50, "Name must be between 2 and 50 characters"),
+    .string({ required_error: 'Name is required' })
+    .min(2, 'Name must be between 2 and 50 characters')
+    .max(50, 'Name must be between 2 and 50 characters'),
   email: z
-    .string({ required_error: "Email is required" })
-    .email("Invalid email address"),
-  role:z.enum(['admin','landlord','tenant']),
+    .string({ required_error: 'Email is required' })
+    .email('Invalid email address'),
+  role: z.enum(['admin', 'landlord', 'tenant']),
   password: z
-    .string({ required_error: "Password is required" })
-    .min(8, "Password must be at least 8 characters"),
+    .string({ required_error: 'Password is required' })
+    .min(8, 'Password must be at least 8 characters'),
   passwordConfirm: z
-    .string({ required_error: "Password Confirmation is required" })
+    .string({ required_error: 'Password Confirmation is required' })
     .min(1),
 });
 
 export const updateUserSchema = z.object({
   name: z
-    .string({ required_error: "Name is required" })
-    .min(2, "Name must be between 2 and 50 characters")
-    .max(50, "Name must be between 2 and 50 characters"),
+    .string({ required_error: 'Name is required' })
+    .min(2, 'Name must be between 2 and 50 characters')
+    .max(50, 'Name must be between 2 and 50 characters'),
   email: z
-    .string({ required_error: "Email is required" })
-    .email("Invalid email address"),
-  
+    .string({ required_error: 'Email is required' })
+    .email('Invalid email address'),
 });

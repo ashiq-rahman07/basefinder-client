@@ -1,26 +1,24 @@
-"use client";
-import { ICategory } from "@/types";
-import CreateCategoryModal from "./CreateCategoryModal";
-import { NMTable } from "@/components/ui/core/NMTable";
-import { ColumnDef } from "@tanstack/react-table";
-import Image from "next/image";
-import { Trash } from "lucide-react";
-import EmptyItems from "@/components/shared/EmptyItems";
+'use client';
+import { ICategory } from '@/types';
+import CreateCategoryModal from './CreateCategoryModal';
+import { NMTable } from '@/components/ui/core/NMTable';
+import { ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
+import { Trash } from 'lucide-react';
+import EmptyItems from '@/components/shared/EmptyItems';
 
 type TCategoriesProps = {
   categories: ICategory[];
 };
 
 const ManageCategories = ({ categories }: TCategoriesProps) => {
- 
- 
-  const handleDelete = (name:string) => {
+  const handleDelete = (name: string) => {
     window.alert(`Category: ${name} Can Not delete `);
   };
 
   const columns: ColumnDef<ICategory>[] = [
     {
-      accessorKey: "name",
+      accessorKey: 'name',
       header: () => <div>Category Name</div>,
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
@@ -36,16 +34,16 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
       ),
     },
     {
-      accessorKey: "createdBy",
+      accessorKey: 'createdBy',
       header: () => <div>Created By</div>,
       cell: ({ row }) => (
         <div>
-        <span className="truncate">{row.original.createdBy.name}</span>
+          <span className="truncate">{row.original.createdBy.name}</span>
         </div>
       ),
     },
     {
-      accessorKey: "action",
+      accessorKey: 'action',
       header: () => <div>Action</div>,
       cell: ({ row }) => (
         <button
@@ -62,13 +60,10 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
   return (
     <div>
       <div className="flex items-center justify-between">
-      
         <h1 className="text-xl font-bold">Manage Categories</h1>
-       
-         { categories.length === 0 && <EmptyItems title="Categories"/>}
-    
-        
-        
+
+        {categories.length === 0 && <EmptyItems title="Categories" />}
+
         <CreateCategoryModal />
       </div>
       <NMTable data={categories} columns={columns} />

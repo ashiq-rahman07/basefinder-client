@@ -1,7 +1,7 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "../../button";
-import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Button } from '../../button';
+import { useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 
 const TablePagination = ({ totalPage }: { totalPage: number }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +41,7 @@ const TablePagination = ({ totalPage }: { totalPage: number }) => {
             router.push(`${pathname}?page=${index + 1}`);
           }}
           key={index}
-          variant={currentPage === index + 1 ? "default" : "outline"}
+          variant={currentPage === index + 1 ? 'default' : 'outline'}
           size="sm"
           className="w-8 h-8 rounded-full flex items-center justify-center"
         >

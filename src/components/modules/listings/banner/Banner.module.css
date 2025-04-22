@@ -1,8 +1,8 @@
 .banner {
-    background: url("/house1.png");
-    height: 350px;
+  background: url('/house1.png');
+  height: 350px;
   opacity: 50px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

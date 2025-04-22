@@ -1,4 +1,4 @@
-import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar";
+import { AppSidebar } from '@/components/modules/dashboard/sidebar/app-sidebar';
 // import {
 //   Breadcrumb,
 //   BreadcrumbItem,
@@ -12,7 +12,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
+} from '@/components/ui/sidebar';
 
 export default function DashboardLayout({
   children,

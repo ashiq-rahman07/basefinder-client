@@ -3,7 +3,6 @@
 // import { ContactInfo } from "@/components/modules/contact/ContactInfo";
 // import { MapSection } from "@/components/modules/contact/MapSection";
 
-
 // export default function ContactPage() {
 //   return (
 //     <div>
@@ -19,10 +18,7 @@
 //   );
 // }
 
-
 // pages/contact.tsx
-
-
 
 const Contact = () => {
   return (

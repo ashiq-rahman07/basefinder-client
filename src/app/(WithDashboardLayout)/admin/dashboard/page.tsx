@@ -1,26 +1,39 @@
-import { getAllUser } from "@/services/AuthService";
-import { getAllListingByUser } from "@/services/listing";
-import { getAllRequest } from "@/services/Rental Request";
-import { FileText, Home, User } from "lucide-react";
+import { getAllUser } from '@/services/AuthService';
+import { getAllListingByUser } from '@/services/listing';
+import { getAllRequest } from '@/services/Rental Request';
+import { FileText, Home, User } from 'lucide-react';
 
-const AdminHomePage = async() => {
+const AdminHomePage = async () => {
   const usersData = await getAllUser();
-     const { meta} = usersData
-     const {data}= await getAllListingByUser();
-     const requestData =await getAllRequest()
-     const {meta:requestMeta} = requestData?.data
-     
-     
+  const { meta } = usersData;
+  const { data } = await getAllListingByUser();
+  const requestData = await getAllRequest();
+  const { meta: requestMeta } = requestData?.data;
+
   const stats = [
-    { title: "Total Users", count: meta?.total, icon: <User className="text-green-600" /> },
-    { title: "Listings", count: data.meta?.total, icon: <Home className="text-blue-600" /> },
-    { title: "Requests", count: requestMeta?.total, icon: <FileText className="text-purple-600" /> },
+    {
+      title: 'Total Users',
+      count: meta?.total,
+      icon: <User className="text-green-600" />,
+    },
+    {
+      title: 'Listings',
+      count: data.meta?.total,
+      icon: <Home className="text-blue-600" />,
+    },
+    {
+      title: 'Requests',
+      count: requestMeta?.total,
+      icon: <FileText className="text-purple-600" />,
+    },
   ];
-    return (
-      <main className="flex-1 p-6">
+  return (
+    <main className="flex-1 p-6">
       <header className="mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
-        <p className="text-gray-500">Welcome, Admin! Here&apos;s what&apos;s happening today.</p>
+        <p className="text-gray-500">
+          Welcome, Admin! Here&apos;s what&apos;s happening today.
+        </p>
       </header>
 
       {/* Stats */}
@@ -39,7 +52,7 @@ const AdminHomePage = async() => {
         ))}
       </section>
     </main>
-    );
-  };
-  
-  export default AdminHomePage;
+  );
+};
+
+export default AdminHomePage;

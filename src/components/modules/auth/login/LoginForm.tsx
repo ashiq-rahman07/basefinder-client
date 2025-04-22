@@ -1,6 +1,6 @@
-"use client";
+'use client';
 // import ReCAPTCHA from "react-google-recaptcha";
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -8,25 +8,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import Link from "next/link";
-import Logo from '@/assets/logonew.png'
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import Link from 'next/link';
+import Logo from '@/assets/logonew.png';
+import { zodResolver } from '@hookform/resolvers/zod';
 // import { loginUser, reCaptchaTokenVerification } from "@/services/AuthService";
-import { loginUser } from "@/services/AuthService";
-import { toast } from "sonner";
-import { loginSchema } from "./loginValidation";
+import { loginUser } from '@/services/AuthService';
+import { toast } from 'sonner';
+import { loginSchema } from './loginValidation';
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useUser } from "@/context/UserContext";
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useUser } from '@/context/UserContext';
 
-import { IUser } from "@/types";
-import Image from "next/image";
+import { IUser } from '@/types';
+import Image from 'next/image';
 
 export default function LoginForm() {
- const { setUser } = useUser();
+  const { setUser } = useUser();
   const form = useForm({
     resolver: zodResolver(loginSchema),
   });
@@ -34,7 +34,7 @@ export default function LoginForm() {
   // const [reCaptchaStatus, setReCaptchaStatus] = useState(false);
 
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirectPath");
+  const redirect = searchParams.get('redirectPath');
   const router = useRouter();
 
   const {
@@ -52,21 +52,20 @@ export default function LoginForm() {
   //   }
   // };
 
-  
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async data => {
     try {
       const user = await loginUser(data);
-      
+
       if (user) {
-        setUser(user as IUser)
-        toast.success("User Logged In Succesfully");
+        setUser(user as IUser);
+        toast.success('User Logged In Succesfully');
         if (redirect) {
           router.push(redirect);
         } else {
-          router.push("/");
+          router.push('/');
         }
       } else {
-        toast.error("Logging Error");
+        toast.error('Logging Error');
       }
     } catch (err: any) {
       console.error(err);
@@ -76,7 +75,7 @@ export default function LoginForm() {
   return (
     <div className="border-2 border-gray-300 rounded-xl flex-grow max-w-md w-full p-5">
       <div className="flex items-center space-x-4 ">
-      <Image src={Logo} alt="house" width={100} height={100} className=""/>
+        <Image src={Logo} alt="house" width={100} height={100} className="" />
         <div>
           <h1 className="text-xl font-semibold">Login</h1>
           <p className="font-extralight text-sm text-gray-600">Welcome back!</p>
@@ -91,7 +90,7 @@ export default function LoginForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" {...field} value={field.value || ""} />
+                  <Input type="email" {...field} value={field.value || ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,7 +103,7 @@ export default function LoginForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" {...field} value={field.value || ""} />
+                  <Input type="password" {...field} value={field.value || ''} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -124,7 +123,7 @@ export default function LoginForm() {
             type="submit"
             className="mt-5 w-full"
           >
-            {isSubmitting ? "Logging...." : "Login"}
+            {isSubmitting ? 'Logging....' : 'Login'}
           </Button>
         </form>
       </Form>
