@@ -67,7 +67,7 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
     {
       accessorKey: "landlordUser",
       header: "Landlord User",
-      cell: ({ row }) => <span>{row.original.landlordUser.name}</span>,
+      cell: ({ row }) => <span>{row.original.landlordUser?.name}</span>,
     },
     {
       accessorKey: "rentAmount",
@@ -143,7 +143,7 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
     
          
        { 
-        listings.length === 0 && <EmptyItems title="Listings"/>
+        listings?.length === 0 && <EmptyItems title="Listings"/>
        }
     
    

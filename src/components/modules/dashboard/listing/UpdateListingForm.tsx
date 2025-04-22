@@ -106,7 +106,7 @@ export default function UpdateListingForm({ listing }: { listing: IListing }) {
     const modifiedData = {
       ...data,
     
-     
+      amenities:addAmenities,
       rentAmount: parseInt(data.rentAmount),
       bedrooms: parseInt(data.bedrooms),
     };
@@ -122,12 +122,13 @@ console.log(modifiedData)
 
       if (res.success) {
         toast.success(res.message);
-        router.push("/landlord/listing");
+        router.push("/listing");
       } else {
         toast.error(res.message);
       }
     } catch (err: any) {
-      console.error(err);
+      console.log(err);
+      toast.error(err.message);
     }
   };
 
@@ -314,7 +315,7 @@ console.log(modifiedData)
           </div>
 
          <Button type="submit" className="mt-5 w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Update Listing" : "Listing"}
+            {isSubmitting ? "Updated Listing...." : "Update Listing"}
           </Button>
         </form>
       </Form>

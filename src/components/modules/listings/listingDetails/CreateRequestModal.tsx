@@ -32,7 +32,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { submitListing } from "@/services/Rental Request";
 import { toast } from "sonner";
-// import { toast } from "sonner";
+
 
 type modalProps={
     listingId:string
@@ -40,7 +40,7 @@ type modalProps={
 
 const CreateRequestModal: React.FC<modalProps> = ({listingId}) => {
   
-  console.log(listingId);
+ 
 
   const form = useForm();
   const {
@@ -62,7 +62,7 @@ const requestFormData = {
   rentDuration:data.rentDuration,
   message:data.message 
 }
-console.log(requestFormData);
+
 try {
   const res = await submitListing(requestFormData);
 

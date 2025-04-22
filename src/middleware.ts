@@ -7,7 +7,7 @@ const authRoutes = ["/login", "/register"];
 
 const roleBasedPrivateRoutes = {
   landlord: [/^\/landlord/, /^\/create-house/,/^\/profile/],
-  tenant: [/^\/tenant/, /^\/create-request/,/^\/profile/],
+  tenant: [/^\/tenant/, /^\/create-request/,/^\/profile/,/^\/payrent/],
   admin: [/^\/admin/,/^\/profile/],
 };
 
@@ -51,5 +51,9 @@ export const config = {
     "/landlord/:page",
     "/tenant",
     "/tenant:page",
+    "/tenant/my-request",
+    "/payrent",
+    "/payrent/verify",
+    "/payrent/verify/:page",
   ],
 };

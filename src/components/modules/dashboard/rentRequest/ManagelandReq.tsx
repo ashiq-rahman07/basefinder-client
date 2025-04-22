@@ -140,7 +140,7 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
     
          
        { 
-        requests.length === 0 && <EmptyItems title="Listings"/>
+        requests?.length === 0 && <EmptyItems title="Listings"/>
        }
     
    

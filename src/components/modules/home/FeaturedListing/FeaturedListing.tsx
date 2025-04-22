@@ -12,7 +12,7 @@ const FeaturedListing = async() => {
   <div className="max-w-7xl mx-auto px-4">
     <h2 className="text-3xl font-semibold text-gray-800 mb-8 text-center">Featured Properties</h2>
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {listings.slice(0, 4).map((listing: IListing, idx: number)  => (
+      {listings?.slice(0, 4).map((listing: IListing, idx: number)  => (
        <ListingCard key={idx} listing={listing}/>
       ))}
     </div>
