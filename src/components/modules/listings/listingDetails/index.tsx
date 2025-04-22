@@ -31,6 +31,7 @@ if(!listing && !requestData){
 
     const paymentData = {
       listingId:listing?._id,
+      requestId:requestData?._id,
     rentAmount:listing?.rentAmount
     }
     console.log(paymentData);
@@ -131,7 +132,10 @@ if(!listing && !requestData){
                 >
                   <p className="font-semibold">Status: {requestData.status}</p>
                   {requestData?.paymentStatus === 'Paid' ?(
-                       <p className="mt-2"> Your Rent Amount Succesfully Paid For This Listing.</p>
+                      <>
+                         <p className="mt-2"> Your Rent Amount Succesfully Paid For This Listing.</p>
+                         <p className="mt-2">Direct Contact Landlord Phone : {requestData?.landlordPhone}</p>
+                      </>
                   ):
                   <>
                      {requestData?.status === 'Rejected' &&  (

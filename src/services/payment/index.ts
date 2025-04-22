@@ -7,7 +7,8 @@ import { cookies } from "next/headers";
 
 
 export interface IPayment{
-    listingId: string; 
+    listingId: string;
+    requestId:string, 
     rentAmount: number
 }
 export const createPayment = async (  paymentData:IPayment  ) => {
@@ -61,4 +62,5 @@ export const getSinglePayment = async(orderId:string)=>{
         return Error(error);
       }
 }
+
 

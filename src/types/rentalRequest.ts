@@ -2,6 +2,7 @@
     _id: string;
     listingId: {
       _id:string,
+      images:Array<string>,
       name:string,
       location:string,
       rentAmount:number

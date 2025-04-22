@@ -7,6 +7,7 @@ export interface IPayment {
     _id:string;
     tenant:string;
     listing:string;
+    requestId:string;
     rentAmount:number;
     status:string
     transaction:ITransaction

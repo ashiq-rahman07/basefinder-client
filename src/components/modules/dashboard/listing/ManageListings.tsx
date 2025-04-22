@@ -12,6 +12,7 @@ import { deleteListing } from "@/services/listing";
 import { IMeta } from "@/types";
 import TablePagination from "@/components/ui/core/NMTable/TablePagination";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta }) => {
   const router = useRouter();
@@ -23,8 +24,14 @@ const ManageListings = ({ listings,  meta }: { listings: IListing[], meta: IMeta
   const handleDelete = async(productId: string) => {
     console.log("Deleting product with ID:", productId);
     try {
-      const{data} = await deleteListing(productId)
-      console.log(data);
+      const confirm = window.confirm("Are you sure? This will delete  listings, and this listing  requests.");
+      if (!confirm) return;
+      const res = await deleteListing(productId)
+      if(res.success){
+        toast.success('Listing Deleted Succesfully')
+        // router.refresh()
+      }
+ 
     } catch (error) {
       console.log(error);
     }

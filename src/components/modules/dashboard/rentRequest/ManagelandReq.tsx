@@ -12,6 +12,7 @@ import {  updateRequestData } from "@/services/Rental Request";
 import { IRentalRequest } from "@/types";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
+import Image from "next/image";
 import {  useState } from "react";
 import { toast } from "sonner";
 
@@ -51,20 +52,32 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
 
       
     };
+    
 
 
  const columns: ColumnDef<IRentalRequest>[] = [
- 
+  {
+    accessorKey: "Listing",
+    header: "Listing",
+    cell: ({ row }) => (
+      <div className="flex items-center space-x-3">
+        <Image
+          src={row.original.listingId.images[0]}
+          alt={row.original.listingId.location}
+          width={40}
+          height={40}
+          className="w-8 h-8 rounded-full"
+        />
+        <span className="truncate">{row.original.listingId.name}</span>
+      </div>
+    ),
+  },
   {
     accessorKey: "Tenant name",
     header: "Tenant Name",
     cell: ({ row }) => <span>{row.original.tenantId.name}</span>,
   },
-  {
-    accessorKey: "Listing name",
-    header: "Listing Name",
-    cell: ({ row }) => <span>{row.original.listingId.name}</span>,
-  },
+ 
 
   {
     accessorKey: "status",
@@ -117,16 +130,13 @@ const ManageLandReq =({ requests }: { requests: IRentalRequest[] }) => {
  
  
  
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
 
   return (
     <div className="p-6">
     
     <div className="flex items-center justify-between">
    
-        <h1 className="text-xl font-bold">MRental Requests</h1>
+        <h1 className="text-xl font-bold">Rental Requests Management</h1>
     
          
        { 

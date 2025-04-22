@@ -14,8 +14,8 @@ type TCategoriesProps = {
 const ManageCategories = ({ categories }: TCategoriesProps) => {
  
  
-  const handleDelete = (data: ICategory) => {
-    console.log(data);
+  const handleDelete = (name:string) => {
+    window.alert(`Category: ${name} Can Not delete `);
   };
 
   const columns: ColumnDef<ICategory>[] = [
@@ -51,7 +51,7 @@ const ManageCategories = ({ categories }: TCategoriesProps) => {
         <button
           className="text-red-500"
           title="Delete"
-          onClick={() => handleDelete(row.original)}
+          onClick={() => handleDelete(row.original.name)}
         >
           <Trash className="w-5 h-5" />
         </button>
