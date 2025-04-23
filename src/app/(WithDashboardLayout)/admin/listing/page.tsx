@@ -11,6 +11,9 @@ const ListingPage = async ({
   //   const { data, meta } = await getAllProducts();
   const { page } = await searchParams;
   const { data } = await getAllListingByUser(page, '3');
+  if (!data || !data.result) {
+    return <div>Failed to load listings.</div>;
+  }
 
   return (
     <div>
