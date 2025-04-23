@@ -82,9 +82,9 @@ export const getAllListings = async (
 //   }
 // };
 // services/listing.ts
-export const getAllListingByUser = async (page?: string, limit?: string) => {
+export const getAllListingByUser = async (page?: string, limit?: string,token?:string) => {
   try {
-    const token = (await cookies()).get('accessToken')?.value;
+    
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
       {
@@ -92,10 +92,11 @@ export const getAllListingByUser = async (page?: string, limit?: string) => {
         headers: {
          Authorization: token ?? '',
         },
+        cache: 'no-store',
         next: {
           tags: ['LISTING'],
         },
-        cache: 'no-store',
+       
       }
     );
 
