@@ -1,4 +1,5 @@
 'use server';
+import { getValidToken } from '@/lib/verifyToken';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -87,23 +88,22 @@ export const getAllListingByUser = async (
 
  
 ) => {
+  const token = await getValidToken()
   try {
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings`,
       {
         method: 'GET',
         headers: {
-         Authorization: (await cookies()).get('accessToken')!.value,
-          'Content-Type': 'application/json',
+         Authorization: token,
+         
         },
         // credentials: 'include' // If using cookies
       }
     );
 
-    // if (!res.ok) {
-    //   const errorText = await res.text();
-    //   throw new Error(`Failed to fetch listings: ${res.status} - ${errorText}`);
-    // }
+  
 
     return await res.json();
   } catch (error: any) {
