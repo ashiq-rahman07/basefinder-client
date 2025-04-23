@@ -82,7 +82,7 @@ export const getAllListings = async (
 //   }
 // };
 // services/listing.ts
-export const getAllListingByUser = async (page?: string, limit?: string,token?:string) => {
+export const getAllListingByUser = async (page: string, limit: string,token?:string) => {
   try {
     
     const res = await fetch(

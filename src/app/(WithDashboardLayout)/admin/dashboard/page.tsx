@@ -1,12 +1,12 @@
 import { getAllUser } from '@/services/AuthService';
-import { getAllListingByUser } from '@/services/listing';
+import {  getAllListings } from '@/services/listing';
 import { getAllRequest } from '@/services/Rental Request';
 import { FileText, Home, User } from 'lucide-react';
 
 const AdminHomePage = async () => {
   const usersData = await getAllUser();
   const userMeta = usersData?.meta || {};
-  const listingsData = await getAllListingByUser();
+  const listingsData = await getAllListings();
 const listingList = listingsData?.data || [];
 const requestData = await getAllRequest();
 const requestMeta = requestData?.data?.meta || {};
