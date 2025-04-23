@@ -82,36 +82,33 @@ export const getAllListings = async (
 //   }
 // };
 // services/listing.ts
-export const getAllListingByUser = async (page: string, limit: string,token?:string) => {
+export const getAllListingByUser = async (
+  page = '1', 
+  limit = '3',
+  token?: string
+) => {
   try {
-    
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
       {
         method: 'GET',
         headers: {
-         Authorization: token ?? '',
+          Authorization: token ?? '',
+          'Content-Type': 'application/json',
         },
-        cache: 'no-store',
-        next: {
-          tags: ['LISTING'],
-        },
-       
+        credentials: 'include' // If using cookies
       }
     );
 
-    // 🔐 Check for failed response before parsing
     if (!res.ok) {
-      const errorText = await res.text(); // logs what's going wrong
-      console.error('API error:', res.status, errorText);
-      throw new Error(`Failed to fetch listings: ${res.status}`);
+      const errorText = await res.text();
+      throw new Error(`Failed to fetch listings: ${res.status} - ${errorText}`);
     }
 
-    const data = await res.json();
-    return data;
+    return await res.json();
   } catch (error: any) {
     console.error('getAllListingByUser error:', error);
-    return { data: null }; // make return type safe for frontend
+    throw error; // Re-throw for error boundary
   }
 };
 
