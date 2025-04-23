@@ -1,6 +1,8 @@
 import ManageListings from '@/components/modules/dashboard/listing/ManageListings';
 import { getAllListingByUser } from '@/services/listing';
 
+
+export const dynamic = 'force-dynamic';
 const ListingPage = async ({
   searchParams,
 }: {

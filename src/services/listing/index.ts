@@ -66,7 +66,6 @@ export const getAllListingByUser = async (page?: string, limit?: string) => {
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
       {
         method: 'GET',
-        cache: 'force-cache',
         headers: {
           Authorization: (await cookies()).get('accessToken')!.value,
         },
