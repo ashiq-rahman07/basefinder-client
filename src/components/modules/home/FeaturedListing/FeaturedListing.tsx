@@ -5,7 +5,7 @@ import { ListingCard } from './ListingCard';
 
 
 
-export const revalidate = 360;
+
 const FeaturedListing = async () => {
   const { data } = await getAllListings();
   const listings = data?.result;
