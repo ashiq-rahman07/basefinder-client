@@ -4,8 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ManageListings from '@/components/modules/dashboard/listing/ManageListings';
-// import Cookies from 'js-cookie';
-import { cookies } from 'next/headers'
+
 import { getAllListingByUser } from '@/services/listing';
 
 export default function ListingClient() {
@@ -19,16 +18,8 @@ export default function ListingClient() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const page = searchParams.get('page') || '1';
-        console.log(page);
-        // const token = Cookies.get('accessToken');
-        const token = (await cookies()).get('accessToken')!.value
-        console.log(token);
-        if (!token) {
-          window.location.href = '/login';
-          return;
-        }
-        console.log(token);
+     
+      
 
         // const response = await fetch(
         //   `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=3&page=${page}`,
@@ -42,18 +33,18 @@ export default function ListingClient() {
         //     credentials: 'include'
         //   }
         // );
-        const response = await getAllListingByUser()
+        const data = await getAllListingByUser()
 
-        if (!response.ok) {
-          if (response.status === 401) {
-            document.cookie = 'accessToken=; Max-Age=0; path=/';
-            window.location.href = '/login';
-            return;
-          }
-          throw new Error(`Request failed with status ${response.status}`);
-        }
+        // if (!response.ok) {
+        //   if (response.status === 401) {
+        //     document.cookie = 'accessToken=; Max-Age=0; path=/';
+        //     window.location.href = '/login';
+        //     return;
+        //   }
+        //   throw new Error(`Request failed with status ${response.status}`);
+        // }
 
-        const data = await response.json();
+        // const data = await response.json();
         setListings(data.result || []);
         setMeta(data.meta);
       } catch (err) {
