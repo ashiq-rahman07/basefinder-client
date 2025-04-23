@@ -4,7 +4,8 @@ import { IListing } from '@/types/listing';
 import { ListingCard } from './ListingCard';
 
 
-export const revalidate = 3600;
+
+export const revalidate = 360;
 const FeaturedListing = async () => {
   const { data } = await getAllListings();
   const listings = data?.result;

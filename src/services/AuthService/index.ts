@@ -138,7 +138,10 @@ export const getAllUser = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/user/allusers`,{
-        cache: 'force-cache',
+        method: 'GET',
+        headers: {
+          Authorization: (await cookies()).get('accessToken')!.value,
+        },
       }
     );
     const data = await res.json();
