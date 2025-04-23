@@ -60,6 +60,28 @@ export const getAllListings = async (
 //       return Error(error.message);
 //     }
 //   };
+// export const getAllListingByUser = async (page?: string, limit?: string) => {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
+//       {
+//         method: 'GET',
+//         headers: {
+//           Authorization: (await cookies()).get('accessToken')!.value,
+//         },
+//         next: {
+//           tags: ['LISTING'],
+//         },
+//       }
+//     );
+//     const data = await res.json();
+
+//     return data;
+//   } catch (error: any) {
+//     return Error(error.message);
+//   }
+// };
+// services/listing.ts
 export const getAllListingByUser = async (page?: string, limit?: string) => {
   try {
     const res = await fetch(
@@ -67,20 +89,29 @@ export const getAllListingByUser = async (page?: string, limit?: string) => {
       {
         method: 'GET',
         headers: {
-          Authorization: (await cookies()).get('accessToken')!.value,
+          Authorization: (await cookies()).get('accessToken')?.value || '',
         },
         next: {
           tags: ['LISTING'],
         },
       }
     );
-    const data = await res.json();
 
+    // 🔐 Check for failed response before parsing
+    if (!res.ok) {
+      const errorText = await res.text(); // logs what's going wrong
+      console.error('API error:', res.status, errorText);
+      throw new Error(`Failed to fetch listings: ${res.status}`);
+    }
+
+    const data = await res.json();
     return data;
   } catch (error: any) {
-    return Error(error.message);
+    console.error('getAllListingByUser error:', error);
+    return { data: null }; // make return type safe for frontend
   }
 };
+
 // add product
 export const addListing = async (listingData: FormData): Promise<any> => {
   try {
