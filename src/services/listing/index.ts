@@ -11,49 +11,53 @@ export const getAllListings = async (
   const params = new URLSearchParams();
 
   if (query?.price) {
-    params.append('minPrice', '0');
-    params.append('maxPrice', query?.price.toString());
+    params.append("minPrice", "0");
+    params.append("maxPrice", query.price.toString());
   }
-
   if (query?.category) {
-    params.append('categories', query?.category.toString());
+    params.append("categories", query.category.toString());
   }
-
   if (query?.bedrooms) {
-    params.append('bedrooms', query?.bedrooms.toString());
+    params.append("bedrooms", query.bedrooms.toString());
   }
+  if (limit) params.append("limit", limit);
+  if (page) params.append("page", page);
+
+  const url = `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings?${params.toString()}`;
+  console.log("🌐 Fetching Listings From:", url);
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings?limit=${limit}&page=${page}&${params}`,
-      {
-        next: {
-          tags: ['LISTING'],
-        },
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    const res = await fetch(url, {
+      next: {
+        tags: ["LISTING"],
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const contentType = res.headers.get("content-type");
+
     if (!res.ok) {
       const errorText = await res.text();
-      console.error("API Error:", errorText);
-      throw new Error(`API Error: ${res.status}`);
+      console.error("❌ API Error Response:", errorText);
+      throw new Error(`API responded with status ${res.status}`);
     }
 
     if (contentType?.includes("application/json")) {
-      const data = await res.json();
-      return data;
+      return await res.json();
     } else {
       const text = await res.text();
-      console.error("Unexpected response format:", text);
+      console.error("❌ Unexpected content type:", contentType);
+      console.error("🔍 Response text:", text.slice(0, 300));
       throw new Error("Response is not JSON");
     }
   } catch (error: any) {
-    console.error("Fetch failed:", error.message);
-    return Error(error.message);
+    console.error("💥 Fetch Failed:", error.message);
+    throw new Error(error.message); // ✅ Throw, don't return
   }
 };
+
 
 
 
