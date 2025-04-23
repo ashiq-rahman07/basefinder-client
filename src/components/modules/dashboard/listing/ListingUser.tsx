@@ -4,7 +4,9 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ManageListings from '@/components/modules/dashboard/listing/ManageListings';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
+import { cookies } from 'next/headers'
+import { getAllListingByUser } from '@/services/listing';
 
 export default function ListingClient() {
   const searchParams = useSearchParams();
@@ -12,29 +14,35 @@ export default function ListingClient() {
   const [meta, setMeta] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+ 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const page = searchParams.get('page') || '1';
-        const token = Cookies.get('accessToken');
-        
+        console.log(page);
+        // const token = Cookies.get('accessToken');
+        const token = (await cookies()).get('accessToken')!.value
+        console.log(token);
         if (!token) {
           window.location.href = '/login';
           return;
         }
+        console.log(token);
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=3&page=${page}`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: String(token), // Just the token without "Bearer"
-              'Content-Type': 'application/json',
-            },
-            credentials: 'include'
-          }
-        );
+        // const response = await fetch(
+        //   `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=3&page=${page}`,
+        //   {
+        //     method: 'GET',
+        //     headers: {
+        //       // Authorization: String(token), // Just the token without "Bearer"
+        //       Authorization: token, // Just the token without "Bearer"
+        //       'Content-Type': 'application/json',
+        //     },
+        //     credentials: 'include'
+        //   }
+        // );
+        const response = await getAllListingByUser()
 
         if (!response.ok) {
           if (response.status === 401) {

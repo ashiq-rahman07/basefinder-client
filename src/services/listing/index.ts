@@ -82,28 +82,28 @@ export const getAllListings = async (
 //   }
 // };
 // services/listing.ts
+
 export const getAllListingByUser = async (
-  page = '1', 
-  limit = '3',
-  token?: string
+
+ 
 ) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=${limit}&page=${page}`,
+      `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings`,
       {
         method: 'GET',
         headers: {
-          Authorization: token ?? '',
+         Authorization: (await cookies()).get('accessToken')!.value,
           'Content-Type': 'application/json',
         },
-        credentials: 'include' // If using cookies
+        // credentials: 'include' // If using cookies
       }
     );
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error(`Failed to fetch listings: ${res.status} - ${errorText}`);
-    }
+    // if (!res.ok) {
+    //   const errorText = await res.text();
+    //   throw new Error(`Failed to fetch listings: ${res.status} - ${errorText}`);
+    // }
 
     return await res.json();
   } catch (error: any) {
