@@ -22,20 +22,13 @@ export const getAllListings = async (
   if (query?.bedrooms) {
     params.append('bedrooms', query?.bedrooms.toString());
   }
-
-  // if(query?.searchTerm){
-  //   params.append("searchTerm", query?.searchTerm.toString());
-  // }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings?limit=${limit}&page=${page}&${params}`,
       {
-        
-        next: {
-         
-          tags: ['LISTING'],
+         next: {
+         tags: ['LISTING'],
         },
-      
       }
     );
     const data = await res.json();
@@ -44,6 +37,7 @@ export const getAllListings = async (
     return Error(error.message);
   }
 };
+
 // get all products
 // export const getAllListing = async (page?: string) => {
 //     try {
