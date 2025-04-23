@@ -3,6 +3,7 @@ import { getCurrentUser } from './services/AuthService';
 
 type Role = keyof typeof roleBasedPrivateRoutes;
 
+
 const authRoutes = ['/login', '/register'];
 
 const roleBasedPrivateRoutes = {
@@ -13,16 +14,17 @@ const roleBasedPrivateRoutes = {
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-
+  const cleanPathname = pathname.replace(/\/+$/, '')
+  const isAuthRoute = authRoutes.includes(cleanPathname);
   const userInfo = await getCurrentUser();
 
   if (!userInfo) {
-    if (authRoutes.includes(pathname)) {
+    if (isAuthRoute) {
       return NextResponse.next();
     } else {
       return NextResponse.redirect(
         new URL(
-          `http://localhost:3000/login?redirectPath=${pathname}`,
+          `/login?redirectPath=${pathname}`,
           request.url
         )
       );
