@@ -95,6 +95,7 @@ export const getAllListingByUser = async (page?: string, limit?: string) => {
         next: {
           tags: ['LISTING'],
         },
+        cache: 'no-store',
       }
     );
 
