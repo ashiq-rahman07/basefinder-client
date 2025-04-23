@@ -6,7 +6,6 @@ import { cookies } from 'next/headers';
 export const getAllListings = async (
   page?: string,
   limit?: string,
-
   query?: { [key: string]: string | string[] | undefined }
 ) => {
   const params = new URLSearchParams();
@@ -19,26 +18,44 @@ export const getAllListings = async (
   if (query?.category) {
     params.append('categories', query?.category.toString());
   }
+
   if (query?.bedrooms) {
     params.append('bedrooms', query?.bedrooms.toString());
   }
+
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/landlords/listings?limit=${limit}&page=${page}&${params}`,
       {
-         next: {
-         tags: ['LISTING'],
-        
+        next: {
+          tags: ['LISTING'],
         },
-        headers:{"Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json" },
       }
     );
-    const data = await res.json();
-    return data;
+
+    const contentType = res.headers.get("content-type");
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("API Error:", errorText);
+      throw new Error(`API Error: ${res.status}`);
+    }
+
+    if (contentType?.includes("application/json")) {
+      const data = await res.json();
+      return data;
+    } else {
+      const text = await res.text();
+      console.error("Unexpected response format:", text);
+      throw new Error("Response is not JSON");
+    }
   } catch (error: any) {
+    console.error("Fetch failed:", error.message);
     return Error(error.message);
   }
 };
+
+
 
 // get all products
 // export const getAllListing = async (page?: string) => {

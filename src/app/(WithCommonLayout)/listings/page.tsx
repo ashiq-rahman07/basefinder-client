@@ -13,6 +13,7 @@ const AllProductsPage = async ({
 }) => {
   const query = await searchParams;
   const { data } = await getAllListings(undefined, undefined, query);
+  
   const listings = data?.result;
 
   return (
