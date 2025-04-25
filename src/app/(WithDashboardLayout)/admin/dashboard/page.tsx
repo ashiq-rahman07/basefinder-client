@@ -1,41 +1,48 @@
+import { FileText, Home, User} from 'lucide-react';
 import { getAllUser } from '@/services/AuthService';
-import {  getAllListings } from '@/services/listing';
+import { getAllListings } from '@/services/listing';
 import { getAllRequest } from '@/services/Rental Request';
-import { FileText, Home, User } from 'lucide-react';
+import IndexSection from '@/components/modules/dashboard/admin/IndexSection';
+import { Metadata } from 'next';
 
+
+export const metadata: Metadata = {
+  title: 'Admin Dashboard',
+};
 const AdminHomePage = async () => {
   const usersData = await getAllUser();
   const userMeta = usersData?.meta || {};
+
   const listingsData = await getAllListings();
-const listingList = listingsData?.data || [];
-const requestData = await getAllRequest();
-const requestMeta = requestData?.data?.meta || {};
-  
+  // const listingList = listingsData?.data || [];
+  const listingMeta = listingsData?.data?.meta || {};
+
+  const requestData = await getAllRequest();
+  const requestMeta = requestData?.data?.meta || {};
 
   const stats = [
     {
       title: 'Total Users',
-      count: userMeta?.total,
+      count: userMeta?.total || 0,
       icon: <User className="text-green-600" />,
     },
     {
       title: 'Listings',
-      count: listingList.meta?.total,
+      count: listingMeta?.total || 0,
       icon: <Home className="text-blue-600" />,
     },
     {
       title: 'Requests',
-      count: requestMeta?.total,
+      count: requestMeta?.total || 0,
       icon: <FileText className="text-purple-600" />,
     },
   ];
+
   return (
-    <main className="flex-1 p-6">
-      <header className="mb-8">
+    <main className="flex-1 p-6 space-y-10">
+      <header className="mb-4">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
-        <p className="text-gray-500">
-          Welcome, Admin! Here&apos;s what&apos;s happening today.
-        </p>
+        <p className="text-gray-500">Welcome, Admin! Here’s what’s happening today.</p>
       </header>
 
       {/* Stats */}
@@ -53,6 +60,10 @@ const requestMeta = requestData?.data?.meta || {};
           </div>
         ))}
       </section>
+
+      {/* Revenue Chart */}
+      <IndexSection/>
+   
     </main>
   );
 };

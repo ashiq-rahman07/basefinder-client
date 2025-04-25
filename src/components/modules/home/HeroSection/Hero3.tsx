@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
+import Link from 'next/link';
 import React from 'react';
 
 const Hero3 = () => {
@@ -61,9 +62,11 @@ const Hero3 = () => {
 
             {/* Search Button */}
             <div>
+              <Link href='/listings'>
               <Button type="submit" className="w-full">
                 Search
               </Button>
+              </Link>
             </div>
           </form>
         </div>

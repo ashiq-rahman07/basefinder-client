@@ -17,7 +17,8 @@ const DropDown = () => {
   const { user, isLoading, setIsLoading } = useUser();
   const router = useRouter();
   const pathname = usePathname();
-  const handleLogout = () => {
+
+ const handleLogout = () => {
     logout();
     setIsLoading(true);
 
@@ -46,6 +47,11 @@ const DropDown = () => {
               <DropdownMenuItem>
                 <Link href={`/${user?.role}/dashboard`} className="w-full">
                   Dashboard
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href='/profile' className="w-full">
+                  My Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => handleLogout()}>

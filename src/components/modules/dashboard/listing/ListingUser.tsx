@@ -19,9 +19,7 @@ export default function ListingClient() {
     const fetchData = async () => {
       try {
      
-      
-
-        // const response = await fetch(
+    
         //   `${process.env.NEXT_PUBLIC_BASE_API}/rental-house/listings?limit=3&page=${page}`,
         //   {
         //     method: 'GET',
@@ -35,16 +33,6 @@ export default function ListingClient() {
         // );
         const data = await getAllListingByUser()
 
-        // if (!response.ok) {
-        //   if (response.status === 401) {
-        //     document.cookie = 'accessToken=; Max-Age=0; path=/';
-        //     window.location.href = '/login';
-        //     return;
-        //   }
-        //   throw new Error(`Request failed with status ${response.status}`);
-        // }
-
-        // const data = await response.json();
         setListings(data.result || []);
         setMeta(data.meta);
       } catch (err) {

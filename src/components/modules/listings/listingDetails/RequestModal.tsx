@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { submitListing } from '@/services/Rental Request';
 import { useState, FormEvent } from 'react';
 import DatePicker from 'react-datepicker';
@@ -49,12 +50,12 @@ const RentalModal: React.FC<modalProps> = ({ listingId }) => {
   return (
     <div>
       {/* Button to open modal */}
-      <button
+      <Button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+        className=" text-white bg-primary hover:bg-purple-800 px-6 py-2 rounded-lg  transition duration-300"
       >
-        Request for Rental
-      </button>
+        Request For Rent
+      </Button>
 
       {/* Modal */}
       {isOpen && (
@@ -123,12 +124,12 @@ const RentalModal: React.FC<modalProps> = ({ listingId }) => {
 
               {/* Submit Button */}
               <div className="flex justify-end">
-                <button
+                <Button
                   type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                  className=" text-white px-4 py-2 bg-primary hover:bg-purple-800 rounded-lg transition duration-300"
                 >
                   Submit
-                </button>
+                </Button>
               </div>
             </form>
           </div>

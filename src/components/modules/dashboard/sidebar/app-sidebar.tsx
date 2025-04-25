@@ -82,6 +82,12 @@ export const AppSidebar = ({
       ],
     },
     {
+      title: 'Payment Info',
+      url: '/landlord/landinfo',
+      icon: Home,
+      roles: ['landlord'], // Admin and landlord can see this
+    },
+    {
       title: 'Request Management',
       url: '/landlord/my-listing-request',
       icon: ClipboardList,
@@ -122,6 +128,7 @@ export const AppSidebar = ({
                   height={100}
                   className=""
                 />
+                
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

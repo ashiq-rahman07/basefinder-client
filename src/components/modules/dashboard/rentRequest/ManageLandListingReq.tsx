@@ -31,7 +31,7 @@ const ManageLandListingReq = ({ requests }: { requests: IRentalRequest[] }) => {
     {
       accessorKey: 'name',
       header: 'Listing Name',
-      cell: ({ row }) => <span>{row.original.listingId.name}</span>,
+      cell: ({ row }) => <span>{row.original.listingId?.name}</span>,
     },
     {
       accessorKey: 'status',
@@ -41,7 +41,7 @@ const ManageLandListingReq = ({ requests }: { requests: IRentalRequest[] }) => {
     {
       accessorKey: 'rentAmount',
       header: 'Rent Amount',
-      cell: ({ row }) => <span>{row.original.listingId.rentAmount}</span>,
+      cell: ({ row }) => <span>{row.original.listingId?.rentAmount}</span>,
     },
 
     {

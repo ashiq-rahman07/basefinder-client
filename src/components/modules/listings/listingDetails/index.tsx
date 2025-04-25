@@ -171,21 +171,19 @@ const ListingDetails: React.FC<RentalRequestPageProps> = ({
             </div>
           </div>
         )}
-        {!user && (
-          <div className="mt-4">
-            <p className="text-md text-yellow-600">
-              Rent for this listing please login or register
-            </p>
-            <Button disabled={true} className="my-4">
-              Rent Request
-            </Button>
-          </div>
-        )}
+       
         <div className="mt-4">
-          {user && requestData == null && (
+          {user?.role == "tenant" && requestData == null && (
             // <CreateRequestModal listingId={listing?._id} />
             <RentalModal listingId={listing?._id}/>
           )}
+            {(!user || (user?.role !== 'tenant' && !requestData)) && (
+                <p className="text-yellow-700 text-sm font-semibold mt-2">
+                  Please login or register as a tenant to request this listing.
+                </p>
+              )}
+              
+      
           {requestData?.status === 'Approved' &&
             requestData.paymentStatus === 'Pending' && (
               <div>

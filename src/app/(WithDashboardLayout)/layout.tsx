@@ -1,18 +1,22 @@
 import { AppSidebar } from '@/components/modules/dashboard/sidebar/app-sidebar';
-// import {
-//   Breadcrumb,
-//   BreadcrumbItem,
-//   BreadcrumbLink,
-//   BreadcrumbList,
-//   BreadcrumbPage,
-//   BreadcrumbSeparator,
-// } from "@/components/ui/breadcrumb";
-// import { Separator } from "@/components/ui/separator";
+
+
+export const metadata: Metadata = {
+  title: {
+    default: 'Dashboard - House Solution 🛠️',
+    template: '%s | Dashboard - House Solution',
+  },
+  icons: {
+    icon: '/favicon.png',
+  },
+};
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
+
+import { Metadata } from 'next';
 
 export default function DashboardLayout({
   children,
@@ -21,6 +25,7 @@ export default function DashboardLayout({
 }) {
   return (
     <SidebarProvider>
+      
       <AppSidebar />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">

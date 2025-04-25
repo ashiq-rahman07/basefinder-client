@@ -20,6 +20,9 @@ const TenantPage = () => {
         <p className="text-gray-500">
           Here’s a quick summary of your rental activity.
         </p>
+        <p className="text-gray-500 text-sm">
+          Dashboard home page show Demo data later updated.
+        </p>
       </header>
 
       {/* Active Rental */}

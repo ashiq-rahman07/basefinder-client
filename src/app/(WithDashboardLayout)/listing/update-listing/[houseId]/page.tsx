@@ -1,8 +1,12 @@
 import UpdateListingForm from '@/components/modules/dashboard/listing/UpdateListingForm';
 import { getSingleListing } from '@/services/listing';
-// import UpdateProductForm from "@/components/modules/shop/product/UpdateProductForm";
-// import { getSingleProduct } from "@/services/Product";
+import { Metadata } from 'next';
 
+
+
+export const metadata: Metadata = {
+  title: 'Update listing',
+};
 const UpdateListingPage = async ({
   params,
 }: {

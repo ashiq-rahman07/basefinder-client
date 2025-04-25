@@ -3,14 +3,24 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-import { Menu } from 'lucide-react';
+import {  Menu } from 'lucide-react';
 import Image from 'next/image';
 import Logo from '@/assets/logonew.png';
 
 import DropDown from './DropDown';
+import NotificationDropdown from './notification/Notification';
+import MobileMenu from './MobileMenu';
+// import { useUser } from '@/context/UserContext';
+// import { Button } from '../ui/button';
+// import { logout } from '@/services/AuthService';
+
 
 export default function Navbar() {
+  // const { user, isLoading} = useUser();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+ 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -48,47 +58,21 @@ export default function Navbar() {
         </div>
 
         {/* Authentication Menu */}
-        <DropDown />
-
-        {/* Mobile Menu Toggle */}
-        <button onClick={toggleMenu} className="md:hidden p-2">
+      <div className='flex gap-2 justify-center items-center'>
+      <DropDown />
+      {<NotificationDropdown/>}
+      <button onClick={toggleMenu} className="md:hidden p-2">
           <Menu className="h-6 w-6" />
         </button>
       </div>
+       
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white">
-          <div className="flex flex-col space-y-4 p-4">
-            <Link href="/" className="text-gray-700 hover:text-blue-600">
-              Home
-            </Link>
-            <Link
-              href="/listings"
-              className="text-gray-700 hover:text-blue-600"
-            >
-              Listings
-            </Link>
-            <Link href="/about" className="text-gray-700 hover:text-blue-600">
-              About
-            </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-              Contact
-            </Link>
-            <div className="flex flex-col space-y-2">
-              <Link href="/login" className="text-gray-700 hover:text-blue-600">
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="text-gray-700 hover:text-blue-600"
-              >
-                Register
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+        {/* Mobile Menu Toggle */}
+      
+      </div>
+      { isMenuOpen &&
+        <MobileMenu/>
+        }
       {/* </nav> */}
     </header>
   );

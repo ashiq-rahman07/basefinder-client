@@ -3,9 +3,13 @@ import AllListings from '@/components/modules/listings';
 import ListingBanner from '@/components/modules/listings/banner';
 
 import { getAllListings } from '@/services/listing';
+import { Metadata } from 'next';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
+export const metadata: Metadata = {
+  title: 'All Listing',
+};
 const AllProductsPage = async ({
   searchParams,
 }: {

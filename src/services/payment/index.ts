@@ -1,5 +1,6 @@
 'use server';
 
+import { getValidToken } from '@/lib/verifyToken';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -62,5 +63,25 @@ export const getSinglePayment = async (orderId: string) => {
     return res.json();
   } catch (error: any) {
     return Error(error);
+  }
+};
+export const getLandPaymentInfo = async () => {
+  const token = await getValidToken()
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_API}/rent-pay/land/payment`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization:token,
+        },
+      }
+    );
+    revalidateTag('PAYMENT');
+const data = await res.json()
+    
+  return data;
+  } catch (error: any) {
+    throw new Error(error);
   }
 };

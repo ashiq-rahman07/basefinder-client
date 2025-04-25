@@ -1,5 +1,11 @@
 import { Eye } from 'lucide-react';
+import { Metadata } from 'next';
+import Link from 'next/link';
 
+
+export const metadata: Metadata = {
+  title: 'Landlord Dashboard',
+};
 const LandlordPage = () => {
   const listings = [
     { title: 'Luxury Apartment', status: 'Available', requests: 3 },
@@ -14,6 +20,9 @@ const LandlordPage = () => {
         </h1>
         <p className="text-gray-500">
           Manage your properties and view tenant requests.
+        </p>
+        <p className="text-gray-500 text-sm">
+          Dashboard home page show Demo data later updated.
         </p>
       </header>
 
@@ -52,12 +61,12 @@ const LandlordPage = () => {
               List your new apartment, house, or studio now!
             </p>
           </div>
-          <a
-            href="#"
+          <Link
+            href="/listing/add-listing"
             className="mt-4 md:mt-0 bg-white text-blue-600 font-semibold px-6 py-2 rounded-md shadow hover:bg-gray-100"
           >
             + Add Listing
-          </a>
+          </Link>
         </div>
       </section>
     </main>

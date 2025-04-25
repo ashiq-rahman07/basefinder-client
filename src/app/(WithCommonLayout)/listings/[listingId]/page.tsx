@@ -3,7 +3,10 @@ import ListingDetails from '@/components/modules/listings/listingDetails';
 import { getSingleListing } from '@/services/listing';
 import { getRentReqListTent } from '@/services/Rental Request';
 
-const ProductDetailsPage = async ({
+
+
+
+const ListingDetailsPage = async ({
   params,
 }: {
   params: Promise<{ listingId: string }>;
@@ -25,4 +28,4 @@ const ProductDetailsPage = async ({
   );
 };
 
-export default ProductDetailsPage;
+export default ListingDetailsPage;

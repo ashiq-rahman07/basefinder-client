@@ -156,7 +156,7 @@ const ProfilePage = () => {
               type="submit"
               className="mt-5 w-full"
             >
-              {isSubmitting ? 'Password Updating....' : 'Updagte'}
+              {isSubmitting ? 'Password Changing....' : 'Change Password'}
             </Button>
           </form>
         </Form>

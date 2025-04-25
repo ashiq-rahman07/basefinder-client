@@ -63,20 +63,20 @@ const ManageLandReq = ({ requests }: { requests: IRentalRequest[] }) => {
       cell: ({ row }) => (
         <div className="flex items-center space-x-3">
           <Image
-            src={row.original.listingId.images[0]}
-            alt={row.original.listingId.location}
+            src={row.original.listingId?.images[0]}
+            alt={row.original.listingId?.location}
             width={40}
             height={40}
             className="w-8 h-8 rounded-full"
           />
-          <span className="truncate">{row.original.listingId.name}</span>
+          <span className="truncate">{row.original.listingId?.name}</span>
         </div>
       ),
     },
     {
       accessorKey: 'Tenant name',
       header: 'Tenant Name',
-      cell: ({ row }) => <span>{row.original.tenantId.name}</span>,
+      cell: ({ row }) => <span>{row.original.tenantId?.name}</span>,
     },
 
     {
