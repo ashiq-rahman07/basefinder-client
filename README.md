@@ -63,16 +63,11 @@ NEXT_PUBLIC_API_URL=http://localhost:5000/api
 npm run dev
 Your frontend app will be running at http://localhost:3000.
 
-
-
-
----
-
-### **Backend – BasaFinder API (Node.js + Express + MongoDB)**
-
 # 🏡 BasaFinder Backend – Smart Rental & Housing Solution
 ## 🌐 Base API URL https://basefinder-server.onrender.com/api/vi
+
 Or locally: http://localhost:5000/api/v1
+
 🔗 **Live server. :** [https://basefinder-server.onrender.com](https://basefinder-server.onrender.com)
 
 The backend for **BasaFinder**, a full-featured smart rental housing solution. Built with **Node.js**, **Express**, and **MongoDB**, it supports multiple user roles (Admin, Landlord, Tenant), rental house listings, requests, payments, and notifications.
