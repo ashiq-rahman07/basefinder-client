@@ -2,8 +2,9 @@
 
 BasaFinder is a full-stack web application that connects landlords, tenants, and admins to streamline the rental housing process. It offers secure authentication, role-based dashboards, and a seamless user experience from property listing to payment.
 
-🔗 Live Site
-Coming Soon...
+## 🌐 Live Demo
+
+🔗 [Frontend Live Link](https://basefinder-client.vercel.app)
 
 🚀 Features
 👥 User Roles
