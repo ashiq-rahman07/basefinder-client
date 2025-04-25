@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+🏡 BasaFinder – Smart Rental & Housing Solution
 
-## Getting Started
+BasaFinder is a full-stack web application that connects landlords, tenants, and admins to streamline the rental housing process. It offers secure authentication, role-based dashboards, and a seamless user experience from property listing to payment.
 
-First, run the development server:
+🔗 Live Site
+Coming Soon...
 
-```bash
+🚀 Features
+👥 User Roles
+Admin: Manages all users and rental listings.
+
+Landlord: Posts and manages rental listings, handles rental requests.
+
+Tenant: Searches listings, submits rental requests, and completes payments.
+
+🧩 Core Functionalities
+
+🔐 Authentication with JWT & bcrypt
+
+🏘️ Rental Listings with rich info and multiple images
+
+🔍 Search & Filter by location, price, bedrooms
+
+📄 Rental Requests flow with approval and rejection system
+
+💳 Payment Integration (ShurjoPay)
+
+📬 Email Notifications
+
+📊 Role-Based Dashboards
+
+🖥️ Frontend
+🔧 Tech Stack
+Framework: Next.js (App Router)
+
+Language: TypeScript
+
+Styling: Tailwind CSS
+
+State Management: React Hooks
+
+Deployment: Vercel
+
+📁 Structure Highlights
+/app - Route-based pages with SSR/SSG
+
+/components - Reusable UI components
+
+/dashboard - Role-specific dashboard views
+
+/hooks, /utils - Custom logic and helpers
+
+🛠️ Backend
+🔧 Tech Stack
+Runtime: Node.js
+
+Framework: Express.js
+
+Database: MongoDB (Mongoose)
+
+Authentication: JWT + bcrypt
+
+Deployment:  Render 
+
+📁 API Endpoints
+
+Method	Endpoint	Description
+POST	/api/auth/register	Register landlord/tenant
+POST	/api/auth/login	Login and get JWT
+GET	/api/users	Admin: View all users
+POST	/api/listings	Landlord: Add new rental listing
+GET	/api/listings	Get all listings
+POST	/api/requests	Tenant: Submit rental request
+PUT	/api/requests/:id/approve	Landlord: Approve rental request
+PUT	/api/requests/:id/reject	Landlord: Reject rental request
+POST	/api/payments	Process payment (Stripe/ShurjoPay)
+📷 Screenshots## 🖼️ Screenshots
+
+### 🎯 Dashboard View
+
+![Tenant Dashboard](./public/dashboard.png)
+🧑‍💻 Local Setup
+bash
+Copy
+Edit
+# Clone both frontend and backend
+git clone https://github.com/yourname/basafinder-frontend.git
+git clone https://github.com/yourname/basafinder-backend.git
+📦 Backend
+bash
+Copy
+Edit
+cd basafinder-backend
+npm install
+# Add .env with your Mongo URI, JWT secret, etc.
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🌐 Frontend
+bash
+Copy
+Edit
+cd basafinder-frontend
+npm install
+# Add .env.local with your backend API URL
+npm run dev
+🔐 Environment Variables
+Frontend
+bash
+Copy
+Edit
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+Backend
+ini
+Copy
+Edit
+PORT=5000
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_jwt_secret
+✨ Future Improvements
+🌍 Multi-language support
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+🏷️ Advanced search filters
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+📱 Progressive Web App (PWA)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+🛎️ Real-time chat between tenant & landlord
 
-## Learn More
+🤝 Contributing
+Contributions are welcome! Please open an issue or submit a PR.
 
-To learn more about Next.js, take a look at the following resources:
+🧑‍🏫 About the Developer
+Md Ashiqur Rahman
+Web Developer & Digital Marketer
+Mentor at Her Power Project
+📧 ashiqur.rahman9796@gmail.com
+📱 +8801727504474
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

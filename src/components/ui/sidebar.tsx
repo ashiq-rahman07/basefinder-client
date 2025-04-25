@@ -199,6 +199,7 @@ const Sidebar = React.forwardRef<
     if (isMobile) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
+           {/* <SheetOverlay className="bg-black/80 backdrop-blur-sm z-50" /> */}
           <SheetContent
             data-sidebar="sidebar"
             data-mobile="true"
